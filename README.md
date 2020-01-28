@@ -1,2 +1,2 @@
 # ich
-Starter Kit for TM1 (Planning Analytics) 
+Place to share standard turbo integrator processes for TM1 (Planning Analytics) 
