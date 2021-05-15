@@ -1,178 +1,190 @@
 # Izi
 A library of TI processes for TM1 (Planning Analytics)
 
-
-## }izi.common.email.send
-
-### Description:
+# Global considerations
 ...
 
-### Parameters: 
+# Content description
+
+## Dimensions
+...
+
+## Cubes
+...
+
+## Processes
+
+### }izi.common.email.send
+
+#### Description:
+...
+
+#### Parameters: 
 |Name|Description|Default value
 |--------|--------|--------|
 |pParam1|...|0
 |pParam1|...|0
 |pParam1|...|0
 
-### Examples: 
+#### Examples: 
 ...
 
 
-## }izi.common.url.encode
+### }izi.common.url.encode
 
-### Description:
+#### Description:
 ...
 
-### Parameters: 
+#### Parameters: 
 |Name|Description|Default value
 |--------|--------|--------|
 |pParam1|...|0
 |pParam1|...|0
 |pParam1|...|0
 
-### Examples:
+#### Examples:
 ...
 
 
-## }izi.cube.data.copy
+### }izi.cube.data.copy
 
-### Description:
+#### Description:
 ...
 
-### Parameters: 
+#### Parameters: 
 |Name|Description|Default value
 |--------|--------|--------|
 |pParam1|...|0
 |pParam1|...|0
 |pParam1|...|0
 
-### Examples:
+#### Examples:
 ...
 
 
-## }izi.cube.data.populaterandomly
+### }izi.cube.data.populaterandomly
 
-### Description:
+#### Description:
 ...
 
-### Parameters: 
+#### Parameters: 
 |Name|Description|Default value
 |--------|--------|--------|
 |pParam1|...|0
 |pParam1|...|0
 |pParam1|...|0
 
-### Examples:
+#### Examples:
 ...
 
 
-## }izi.cube.data.split
+### }izi.cube.data.split
 
-### Description:
+#### Description:
 ...
 
-### Parameters: 
+#### Parameters: 
 |Name|Description|Default value
 |--------|--------|--------|
 |pParam1|...|0
 |pParam1|...|0
 |pParam1|...|0
 
-### Examples:
+#### Examples:
 ...
 
 
-## }izi.cube.overfeedingcheckcube.create
+### }izi.cube.overfeedingcheckcube.create
 
-### Description:
+#### Description:
 ...
 
-### Parameters: 
+#### Parameters: 
 |Name|Description|Default value
 |--------|--------|--------|
 |pParam1|...|0
 |pParam1|...|0
 |pParam1|...|0
 
-### Examples:
+#### Examples:
 ...
 
 
-## }izi.dimension.consolidationhierarchy.createfromattribute
+### }izi.dimension.consolidationhierarchy.createfromattribute
 
-### Description:
+#### Description:
 ...
 
-### Parameters: 
+#### Parameters: 
 |Name|Description|Default value
 |--------|--------|--------|
 |pParam1|...|0
 |pParam1|...|0
 |pParam1|...|0
 
-### Examples:
+#### Examples:
 ...
 
 
-## }izi.dimension.consolidationhierarchy.delete
+### }izi.dimension.consolidationhierarchy.delete
 
-### Description:
+#### Description:
 ...
 
-### Parameters: 
+#### Parameters: 
 |Name|Description|Default value
 |--------|--------|--------|
 |pParam1|...|0
 |pParam1|...|0
 |pParam1|...|0
 
-### Examples:
+#### Examples:
 ...
 
 
-## }izi.dimension.element.lock
+### }izi.dimension.element.lock
 
-### Description:
+#### Description:
 ...
 
-### Parameters: 
+#### Parameters: 
 |Name|Description|Default value
 |--------|--------|--------|
 |pParam1|...|0
 |pParam1|...|0
 |pParam1|...|0
 
-### Examples:
+#### Examples:
 ...
 
 
-## }izi.dimension.importfromfile
+### }izi.dimension.importfromfile
 
-### Description:
+#### Description:
 ...
 
-### Parameters: 
+#### Parameters: 
 |Name|Description|Default value
 |--------|--------|--------|
 |pParam1|...|0
 |pParam1|...|0
 |pParam1|...|0
 
-### Examples:
+#### Examples:
 ...
 
 
-## }izi.process.message.add
+### }izi.process.message.add
 
-### Description:
+#### Description:
 ...
 
-### Parameters: 
+#### Parameters: 
 |Name|Description|Default value
 |--------|--------|--------|
 |pParam1|...|0
 |pParam1|...|0
 |pParam1|...|0
 
-### Examples:
+#### Examples:
 ...
