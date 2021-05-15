@@ -14,7 +14,7 @@ A library of TI processes for TM1 (Planning Analytics)
 
 ## Processes
 
-### }izi.common.email.send
+### }izi.common.email.send.pro
 
 #### Description:
 ...
@@ -30,7 +30,7 @@ A library of TI processes for TM1 (Planning Analytics)
 ...
 
 
-### }izi.common.url.encode
+### }izi.common.url.encode.pro
 
 #### Description:
 ...
@@ -46,7 +46,7 @@ A library of TI processes for TM1 (Planning Analytics)
 ...
 
 
-### }izi.cube.data.copy
+### }izi.cube.data.copy.pro
 
 #### Description:
 ...
@@ -62,7 +62,7 @@ A library of TI processes for TM1 (Planning Analytics)
 ...
 
 
-### }izi.cube.data.populaterandomly
+### }izi.cube.data.populaterandomly.pro
 
 #### Description:
 ...
@@ -78,7 +78,7 @@ A library of TI processes for TM1 (Planning Analytics)
 ...
 
 
-### }izi.cube.data.split
+### }izi.cube.data.split.pro
 
 #### Description:
 ...
@@ -94,7 +94,7 @@ A library of TI processes for TM1 (Planning Analytics)
 ...
 
 
-### }izi.cube.overfeedingcheckcube.create
+### }izi.cube.overfeedingcheckcube.create.pro
 
 #### Description:
 ...
@@ -110,7 +110,7 @@ A library of TI processes for TM1 (Planning Analytics)
 ...
 
 
-### }izi.dimension.consolidationhierarchy.createfromattribute
+### }izi.dimension.consolidationhierarchy.createfromattribute.pro
 
 #### Description:
 ...
@@ -126,7 +126,7 @@ A library of TI processes for TM1 (Planning Analytics)
 ...
 
 
-### }izi.dimension.consolidationhierarchy.delete
+### }izi.dimension.consolidationhierarchy.delete.pro
 
 #### Description:
 ...
@@ -142,7 +142,7 @@ A library of TI processes for TM1 (Planning Analytics)
 ...
 
 
-### }izi.dimension.element.lock
+### }izi.dimension.element.lock.pro
 
 #### Description:
 ...
@@ -158,7 +158,7 @@ A library of TI processes for TM1 (Planning Analytics)
 ...
 
 
-### }izi.dimension.importfromfile
+### }izi.dimension.importfromfile.pro
 
 #### Description:
 ...
@@ -174,7 +174,7 @@ A library of TI processes for TM1 (Planning Analytics)
 ...
 
 
-### }izi.process.message.add
+### }izi.process.message.add.pro
 
 #### Description:
 ...
