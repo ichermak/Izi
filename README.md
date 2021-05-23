@@ -27,14 +27,14 @@ All tests were performed with:
 ### }izi.common.email.send.pro
 
 #### Description:
-...
+Send an email using 'Send-MailMessage' powershell cmdlets.
 
 #### Parameters: 
-|Name|Description|Default value
-|--------|--------|--------|
-|pParam1|...|0
-|pParam1|...|0
-|pParam1|...|0
+|Name|Type|Description|Default value
+|--------|--------|--------|--------|
+|pDebugMode|Numeric|[Optional] 0 = Nothing | 1 = Write to }izi.ProcessMessage cube | 2 = 1 + Keep temporary objects|0
+|pParam1||...|0
+|pParam1||...|0
 
 #### Dependencies:
 ...
