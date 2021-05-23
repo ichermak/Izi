@@ -32,9 +32,9 @@ Send an email using 'Send-MailMessage' powershell cmdlets.
 #### Parameters: 
 |Name|Type|Description|Default value
 |--------|--------|--------|--------|
-|pDebugMode|Numeric|[Optional] 0 = Nothing | 1 = Write to }izi.ProcessMessage cube | 2 = 1 + Keep temporary objects|0
-|pParam1||...|0
-|pParam1||...|0
+|pDebugMode|Numeric|[Optional] 0 = Nothing / 1 = Write to }izi.ProcessMessage cube / 2 = 1 + Keep temporary objects|0
+|pScriptDirectory|String|[Optional]|...
+|pSmtpServer|String|[Mandatory]|...
 
 #### Dependencies:
 ...
