@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"fBz11JaVAET34Kvn\?<CXfbmbd]kgTYBd3CN?K5M3:obunnKyypWFB9[yF^>pFE9G?myjpHL:XmvK0H4b8GcrCbXVPPV<VcPg1j90J?xdxb8vYMsVizTqNzH[kynIamYbqdG06Y^]]KbDaHZFv2]yW6j3I4<eqE0o<lC]IBuGx_tbyLHIV0?udj9vkYZozNMLdKDQO3O"
+565,"uJIYE4W]L4W]X50p1JaXuax7_SctTi3bj5<E4WlMq6JAY]>O^0@`5<d^]MlVXX1R1WcgeCUdZtlIFaUKQLmkHblT?vd4\<ctohh=8Qim^RsxogR>Izsun`H5:dISr5b=1Rt_6xLT0_I]Eeu03FD=`=MSc2g5JeFU=@9t8DF_MEVCzD9vTaEjWpc=evJl6;HVs3aBch8\"
 559,1
 928,0
 593,
@@ -25,7 +25,7 @@
 569,0
 592,0
 599,1000
-560,15
+560,17
 pDebugMode
 pScriptDirectory
 pSmtpServer
@@ -41,7 +41,13 @@ pPriority
 pBody
 pBodyAsHtml
 pEncoding
-561,15
+pAttachments
+pWaitForExecution
+561,17
+1
+2
+2
+1
 1
 2
 2
@@ -49,46 +55,48 @@ pEncoding
 2
 2
 2
+1
 2
+1
+1
 2
-2
-2
-2
-2
-2
-2
-590,15
+1
+590,17
 pDebugMode,0
 pScriptDirectory,""
 pSmtpServer,""
-pPort,""
-pUseSsl,""
+pPort,0
+pUseSsl,0
 pUser,""
 pPassword,""
 pFrom,""
 pTo,""
 pCc,""
 pSubject,""
-pPriority,""
+pPriority,1
 pBody,""
-pBodyAsHtml,""
-pEncoding,""
-637,15
+pBodyAsHtml,0
+pEncoding,6
+pAttachments,""
+pWaitForExecution,1
+637,17
 pDebugMode,"[Optional] 0 = Nothing | 1 = Write to }izi.ProcessMessage cube | 2 = 1 + Keep temporary objects"
-pScriptDirectory,"[Optional]"
-pSmtpServer,"[Mandatory]"
-pPort,"[Mandatory]"
-pUseSsl,"[Optional] 0 = Nothing | 1 = Use SSL"
-pUser,"[Optional]"
-pPassword,"[Optional]"
-pFrom,"[Mandatory]"
-pTo,"[Mandatory]"
-pCc,"[Optional]"
-pSubject,"[Mandatory]"
-pPriority,"[Optional] 0 = Nothing | 1 = Write to server message log | 2 = 1 + Keep temporary objects"
-pBody,"[Mandatory]"
-pBodyAsHtml,"[Optional] 0 = Nothing | 1 = Body as HTML"
-pEncoding,"[Optional]"
+pScriptDirectory,"[Optional] Directory where the script called by this process will be exported (Example : 'C:\Applications\Tm1\Izi\Script'). If blank, the data directory will be used"
+pSmtpServer,"[Mandatory] Smtp server address (Example : 'smtp.gmail.com')"
+pPort,"[Mandatory] Port number of the smtp server (Example : 587)"
+pUseSsl,"[Optional] 0 = Do not use SSL | 1 = Use SSL"
+pUser,"[Optional] User name"
+pPassword,"[Optional] User password"
+pFrom,"[Mandatory] Sender email address (Example : 'sender@gmail.com')"
+pTo,"[Mandatory] Recipient email addresses separated by comma (Example : 'recipient1@gmail.com , ecipient2@gmail.com')"
+pCc,"[Optional] Carbon copy email addresses separated by comma (Example : 'cc1@gmail.com , cc2@gmail.com')"
+pSubject,"[Optional] Email subject"
+pPriority,"[Optional] 0 = Low | 1 = Normal | 2 = High"
+pBody,"[Optional] Email body"
+pBodyAsHtml,"[Optional] 0 = Body as Text | 1 = Body as HTML"
+pEncoding,"[Optional] 0 = ascii | 1 = bigendianunicode | 2 = bigendianutf32 | 3 = oem | 4 = unicode | 5 = utf7 | 6 = utf8 | 7 = utf8BOM | 8 = utf8NoBOM | 9 = utf32"
+pAttachments,"[Optional] Path of a file to be attached to the email"
+pWaitForExecution,"[Optional] 0 = Asynchronous execution | 1 = Synchronous execution"
 577,0
 578,0
 579,0
@@ -96,7 +104,7 @@ pEncoding,"[Optional]"
 581,0
 582,0
 603,0
-572,89
+572,278
 #****Begin: Generated Statements***
 #****End: Generated Statements****
 
@@ -108,7 +116,7 @@ pEncoding,"[Optional]"
 # https://github.com/ichermak/Izi
 
 # ====================================================================================================
-# Description : Send an email using 'Send-MailMessage' powershell cmdlets
+# Description : Send an email using 'Send-MailMessage' powershell cmdlets.
 #
 # Updates :
 # 	- 2021/05/14 - Ifthen CHERMAK (www.linkedin.com/in/ichermak) : Creation
@@ -129,63 +137,252 @@ sProcessReturn = '';
 
 # === CONSTANT VARIABLES 
 # ====================================================================================================
+
+# *** Standard variables 
+# **************************************** 
 cCrLf = Char(13) | Char(10);
 If(DimIx('}Clients', Tm1User) = 0); cTM1User = 'Chore'; Else; cTM1User = Tm1User; EndIf;
 cStartTime = Now;
 cProcessName = GetProcessName;
-cIdExecution = cProcessName | '_' | TimSt(cStartTime, '\Y\m\d\h\i\s') | '_' | cTM1User  | '_' | Fill( '0', 5 - Long(NumberToString(Int(Rand * 65536)))) | NumberToString(Int(Rand * 65536));
+cIdExecution = cProcessName | '_' | TimSt(cStartTime, '\Y\m\d\h\i\s') | '_' | cTM1User  | '_' | Fill('0', 5 - Long(NumberToString(Int(Rand * 65536)))) | NumberToString(Int(Rand * 65536));
 cDebugFile = GetProcessErrorFileDirectory | cIdExecution | '.dbg';
 cTemporaryObject = 1;
 If(pDebugMode > 1); cTemporaryObject = 0; EndIf;
 
-# *** Other
+# *** Other variables
 # ****************************************
 cPowershellFile = cProcessName | '.ps1';
-cPowershellFilePath = pScriptDirectory | cPowershellFile;
+
 cPowershellContent = '
+<#' | cCrLf | '
+    .SYNOPSIS' | cCrLf | '
+        Linked to ' | cProcessName | cCrLf | '
+    .DESCRIPTION' | cCrLf | '
+        Linked to ' | cProcessName | cCrLf | '
+    .NOTES' | cCrLf | '
+        Updates :' | cCrLf | '
+            - 2021/05/14 - Ifthen CHERMAK (www.linkedin.com/in/ichermak) : Creation' | cCrLf | '
+' | '#>' | cCrLf | '
+' | cCrLf | '
 PARAM (' | cCrLf | '
-    [Parameter(Mandatory=$true)][String]$SmtpServer,' | cCrLf | '
-    [Parameter(Mandatory=$true)][String]$Port,' | cCrLf | '
-    [Parameter(Mandatory=$true)][String]$UseSsl,' | cCrLf | '
-    [Parameter(Mandatory=$true)][String]$User,' | cCrLf | '
-    [Parameter(Mandatory=$true)][String]$Password,' | cCrLf | '
-    [Parameter(Mandatory=$true)][String]$From,' | cCrLf | '
-    [Parameter(Mandatory=$true)][String]$To,' | cCrLf | '
-    [Parameter(Mandatory=$true)][String]$Cc,' | cCrLf | '
-    [Parameter(Mandatory=$true)][String]$Subject,' | cCrLf | '
-    [Parameter(Mandatory=$true)][String]$Priority,' | cCrLf | '
-    [Parameter(Mandatory=$true)][String]$Body,' | cCrLf | '
-    [Parameter(Mandatory=$true)][String]$BodyAsHtml,' | cCrLf | '
-    [Parameter(Mandatory=$true)][String]$Encoding' | cCrLf | '
+    [Parameter(Mandatory=$false)][String]$SmtpServer,' | cCrLf | '
+    [Parameter(Mandatory=$false)][String]$Port,' | cCrLf | '
+    [Parameter(Mandatory=$false)][String]$UseSsl,' | cCrLf | '
+    [Parameter(Mandatory=$false)][String]$User,' | cCrLf | '
+    [Parameter(Mandatory=$false)][String]$Password,' | cCrLf | '
+    [Parameter(Mandatory=$false)][String]$From,' | cCrLf | '
+    [Parameter(Mandatory=$false)][String]$To,' | cCrLf | '
+    [Parameter(Mandatory=$false)][String]$Cc,' | cCrLf | '
+    [Parameter(Mandatory=$false)][String]$Subject,' | cCrLf | '
+    [Parameter(Mandatory=$false)][String]$Priority,' | cCrLf | '
+    [Parameter(Mandatory=$false)][String]$Body,' | cCrLf | '
+    [Parameter(Mandatory=$false)][String]$BodyAsHtml,' | cCrLf | '
+    [Parameter(Mandatory=$false)][String]$Encoding,' | cCrLf | '
+    [Parameter(Mandatory=$false)][String]$Attachments' | cCrLf | '
 )' | cCrLf | '
 ' | cCrLf | '
+Start-Transcript -Path "$PSCommandPath.log"' | cCrLf | '
+' | cCrLf | '
 $BooleanUseSsl = $UseSsl | % {if($_ -eq "True") {$true} else {$false}}' | cCrLf | '
-$SecureStringPassword = ConvertTo-SecureString $Password -AsPlainText -Force' | cCrLf | '
-$Credential = New-Object System.Management.Automation.PSCredential ($User, $SecureStringPassword)' | cCrLf | '
+If($Password){' | cCrLf | '
+    $SecureStringPassword = ConvertTo-SecureString $Password -AsPlainText -Force' | cCrLf | '
+    $Credential = New-Object System.Management.Automation.PSCredential ($User, $SecureStringPassword)' | cCrLf | '
+}' | cCrLf | '
 $BooleanBodyAsHtml = $BodyAsHtml | % {if($_ -eq "True") {$true} else {$false}}' | cCrLf | '
 ' | cCrLf | '
-$Params = @{' | cCrLf | '
-    SmtpServer = $SmtpServer' | cCrLf | '
-    Port = $Port' | cCrLf | '
-    UseSsl = $BooleanUseSsl' | cCrLf | '
-    Credential = $Credential' | cCrLf | '
-    From = $From' | cCrLf | '
-    To = $To' | cCrLf | '
-    Cc = $Cc' | cCrLf | '
-    Subject = $Subject' | cCrLf | '
-    Priority = $Priority' | cCrLf | '
-    Body = $Body' | cCrLf | '
-    BodyAsHtml = $BooleanBodyAsHtml' | cCrLf | '
-    Encoding = $Encoding' | cCrLf | '
+$Params = @{}' | cCrLf | '
+$Params.Add(''SmtpServer'', $SmtpServer)' | cCrLf | '
+$Params.Add(''Port'', $Port)' | cCrLf | '
+$Params.Add(''UseSsl'', $BooleanUseSsl)' | cCrLf | '
+If($Password){' | cCrLf | '
+    $Params.Add(''Credential'', $Credential)' | cCrLf | '
 }' | cCrLf | '
-Send-MailMessage @Params
+$Params.Add(''From'', $From)' | cCrLf | '
+$Params.Add(''To'', $To)' | cCrLf | '
+If($Cc){' | cCrLf | '
+    $Params.Add(''Cc'', $Cc)' | cCrLf | '
+}' | cCrLf | '
+If($Subject){' | cCrLf | '
+    $Params.Add(''Subject'', $Subject)' | cCrLf | '
+}' | cCrLf | '
+$Params.Add(''Priority'', $Priority)' | cCrLf | '
+If($Body){' | cCrLf | '
+    $Params.Add(''Body'', $Body)' | cCrLf | '
+}' | cCrLf | '
+$Params.Add(''BodyAsHtml'', $BooleanBodyAsHtml)' | cCrLf | '
+$Params.Add(''Encoding'', $Encoding)' | cCrLf | '
+If($Attachments){' | cCrLf | '
+    $Params.Add(''Attachments'', $Attachments)' | cCrLf | '
+}' | cCrLf | '
+' | cCrLf | '
+Send-MailMessage @Params' | cCrLf | '
+' | cCrLf | '
+Stop-Transcript' | cCrLf | '
 ';
 
-DatasourceASCIIQuoteCharacter='';
-ASCIIOutput(cPowershellFilePath, cPowershellContent);
 
-sCmd = Expand('Powershell -ExecutionPolicy Bypass -File "%cPowershellFilePath%" -SmtpServer "%pSmtpServer%" -Port "%pPort%" -UseSsl "%pUseSsl%" -User "%pUser%" -Password "%pPassword%" -From "%pFrom%" -To "%pTo%" -Cc "%pCc%" -Subject "%pSubject%" -Priority "%pPriority%" -Body "%pBody%" -BodyAsHtml "%pBodyAsHtml%" -Encoding "%pEncoding%"');
-ExecuteCommand(sCmd, 1);
+# === PARAMETERS VERIFICATION AND OTHER CHECKS
+# ====================================================================================================
+If((pDebugMode = 1) % (pDebugMode = 2));
+    sNewMsg = Expand('Process started with : pScriptDirectory=%pScriptDirectory%, pSmtpServer=%pSmtpServer%, pPort=%pPort%, pUseSsl=%pUseSsl%, pUser=%pUser%, pPassword=*****, pFrom=%pFrom%, pTo=%pTo%, pCc=%pCc%, pSubject=%pSubject%, pPriority=%pPriority%, pBody=%pBody%, pBodyAsHtml=%pBodyAsHtml%, pEncoding=%pEncoding%, pAttachments=%pAttachments%, pWaitForExecution=%pWaitForExecution%.');
+    ExecuteProcess('}izi.process.message.add'
+                , 'pProcess', cProcessName
+                , 'pMessage', sNewMsg
+                );
+EndIf;
+
+sErrorMsg = '';
+pScriptDirectory = Trim(pScriptDirectory);
+If(pScriptDirectory @<> '');
+    pScriptDirectory = IF(Subst(pScriptDirectory, Long(pScriptDirectory), 1) @= '\', pScriptDirectory, pScriptDirectory | '\');
+EndIf;
+pSmtpServer = Trim(pSmtpServer);
+pPort = Int(pPort);
+pUseSsl = Int(pUseSsl);
+pUser = Trim(pUser);
+pFrom = Trim(pFrom);
+pTo = Trim(pTo);
+pCc = Trim(pCc);
+pSubject = Trim(pSubject);
+pPriority = Int(pPriority);
+pBody = Trim(pBody);
+pBodyAsHtml = Int(pBodyAsHtml);
+pEncoding = Int(pEncoding);
+pAttachments = Trim(pAttachments);
+pWaitForExecution = Int(pWaitForExecution);
+
+If((pScriptDirectory @<> '') & (FileExists(pScriptDirectory) = 0));
+    sNewMsg = Expand('Invalid parameter : pScriptDirectory=%pScriptDirectory%.');
+    sErrorMsg = sErrorMsg | IF(sErrorMsg @= '', '', cCrLf) | sNewMsg;
+EndIf;
+
+If(pSmtpServer @= '');
+    sNewMsg = Expand('Invalid parameter : pSmtpServer=%pSmtpServer%.');
+    sErrorMsg = sErrorMsg | IF(sErrorMsg @= '', '', cCrLf) | sNewMsg;
+EndIf;
+
+If(pPort = 0);
+    sNewMsg = Expand('Invalid parameter : pPort=%pPort%.');
+    sErrorMsg = sErrorMsg | IF(sErrorMsg @= '', '', cCrLf) | sNewMsg;
+EndIf;
+
+If((pUseSsl < 0) % (pUseSsl > 1));
+    sNewMsg = Expand('Invalid parameter : pUseSsl=%pUseSsl%.');
+    sErrorMsg = sErrorMsg | IF(sErrorMsg @= '', '', cCrLf) | sNewMsg;
+EndIf;
+
+If(pSubject @= '');
+    sNewMsg = Expand('Invalid parameter : pSubject=%pSubject%.');
+    sErrorMsg = sErrorMsg | IF(sErrorMsg @= '', '', cCrLf) | sNewMsg;
+EndIf;
+
+If((pPriority < 0) % (pPriority > 2));
+    sNewMsg = Expand('Invalid parameter : pPriority=%pPriority%.');
+    sErrorMsg = sErrorMsg | IF(sErrorMsg @= '', '', cCrLf) | sNewMsg;
+EndIf;
+
+If((pBodyAsHtml < 0) % (pBodyAsHtml > 1));
+    sNewMsg = Expand('Invalid parameter : pBodyAsHtml=%pBodyAsHtml%.');
+    sErrorMsg = sErrorMsg | IF(sErrorMsg @= '', '', cCrLf) | sNewMsg;
+EndIf;
+
+If((pEncoding < 0) % (pEncoding > 9));
+    sNewMsg = Expand('Invalid parameter : pEncoding=%pEncoding%.');
+    sErrorMsg = sErrorMsg | IF(sErrorMsg @= '', '', cCrLf) | sNewMsg;
+EndIf;
+
+If((pAttachments @<> '') & (FileExists(pAttachments) = 0));
+    sNewMsg = Expand('Invalid parameter : pAttachments=%pAttachments%.');
+    sErrorMsg = sErrorMsg | IF(sErrorMsg @= '', '', cCrLf) | sNewMsg;
+EndIf;
+
+If((pWaitForExecution < 0) % (pWaitForExecution > 1));
+    sNewMsg = Expand('Invalid parameter : pWaitForExecution=%pWaitForExecution%.');
+    sErrorMsg = sErrorMsg | IF(sErrorMsg @= '', '', cCrLf) | sNewMsg;
+EndIf;
+
+If(sErrorMsg @<> '');
+    If((pDebugMode = 1) % (pDebugMode = 2));
+    sNewMsg = sErrorMsg;
+        ExecuteProcess('}izi.process.message.add'
+                    , 'pProcess', cProcessName
+                    , 'pMessage', sNewMsg
+                   );
+    EndIf;
+    ProcessBreak;
+EndIf;
+
+
+# === OPERATIONS
+# ====================================================================================================
+sPowershellFilePath = pScriptDirectory | cPowershellFile;
+
+sPort = NumberToString(pPort);
+
+If(pUseSsl = 0);
+    sUseSsl = 'False';
+    
+ElseIf(pUseSsl = 1);
+    sUseSsl = 'True';
+    
+EndIf;
+
+If(pPriority = 0);
+    sPriority = 'Low';
+    
+ElseIf(pPriority = 1);
+    sPriority = 'Normal';
+
+ElseIf(pPriority = 2);
+    sPriority = 'High';
+    
+EndIf;
+
+If(pBodyAsHtml = 0);
+    sBodyAsHtml = 'False';
+    
+ElseIf(pBodyAsHtml = 1);
+    sBodyAsHtml = 'True';
+    
+EndIf;
+
+If(pEncoding = 0);
+    sEncoding = 'ascii';
+    
+ElseIf(pEncoding = 1);
+    sEncoding = 'bigendianunicode';
+
+ElseIf(pEncoding = 2);
+    sEncoding = 'bigendianutf32';
+
+ElseIf(pEncoding = 3);
+    sEncoding = 'oem';
+
+ElseIf(pEncoding = 4);
+    sEncoding = 'unicode';
+
+ElseIf(pEncoding = 5);
+    sEncoding = 'utf7';
+
+ElseIf(pEncoding = 6);
+    sEncoding = 'utf8';
+
+ElseIf(pEncoding = 7);
+    sEncoding = 'utf8BOM';
+
+ElseIf(pEncoding = 8);
+    sEncoding = 'utf8NoBOM';
+
+ElseIf(pEncoding = 9);
+    sEncoding = 'utf32';
+    
+EndIf;
+
+DatasourceASCIIQuoteCharacter = '';
+ASCIIOutput(sPowershellFilePath, cPowershellContent);
+
+sCmd = Expand('Powershell -ExecutionPolicy Bypass -File "%sPowershellFilePath%" -SmtpServer "%pSmtpServer%" -Port "%sPort%" -UseSsl "%sUseSsl%" -User "%pUser%" -Password "%pPassword%" -From "%pFrom%" -To "%pTo%" -Cc "%pCc%" -Subject "%pSubject%" -Priority "%sPriority%" -Body "%pBody%" -BodyAsHtml "%sBodyAsHtml%" -Encoding "%sEncoding%" -Attachments "%pAttachments%"');
+ExecuteCommand(sCmd, pWaitForExecution);
 573,2
 #****Begin: Generated Statements***
 #****End: Generated Statements****
