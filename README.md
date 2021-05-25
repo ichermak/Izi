@@ -18,27 +18,37 @@ All tests were performed with:
 
 ### }izi.Year
 
+#### Description:
+...
+
 ### }izi.Date
+
+#### Description:
+...
 
 ### }izi.Time
 
-### }Processes
+#### Description:
+...
 
 ### }izi.ProcessMessage
+
+#### Description:
+...
 
 ## Cubes
 
 ### }izi.ProcessMessage.cub
 
-#### Dimensions
+#### Description:
+...
+
+#### Dimensions:
 * }izi.Year
 * }izi.Date
 * }izi.Time
 * }Processes
 * }izi.ProcessMessage
-
-#### Usage
-...
 
 ## Processes
 
