@@ -24,46 +24,77 @@ All tests were performed with:
 
 #### Description
 
-This dimension contains year elements from 2020 to 2060.  
-![Image](Image/}izi.Year.png?raw=true)
+This dimension contains year elements from 2020 to 2060.
+
+#### Sample
+
+![Image](Image/}izi.Year.dim.png?raw=true)
 
 ### }izi.Date
 
-#### Description:
-...
+#### Description
+
+This dimension contains date elements in the format 'MM-DD'.
+
+#### Sample
+
+![Image](Image/}izi.Date.dim.png?raw=true)
 
 ### }izi.Time
 
-#### Description:
-...
+#### Description
+
+This dimension contains time elements in the format 'hh:mm:ss'.
+
+#### Sample
+
+![Image](Image/}izi.Time.dim.png?raw=true)
 
 ### }izi.ProcessMessage
 
-#### Description:
-...
+#### Description
+
+This dimension contains measure elements for process messages management:
+
+* Timestamp: Contains the timestamp of the message returned by the process.
+* User: Contains the name of the user who executed the process.
+* Message: Contains The message returned by the process.
+
+#### Sample
+
+![Image](Image/}izi.ProcessMessage.dim.png?raw=true)
 
 ## Cubes
 
 ### }izi.ProcessMessage.cub
 
-#### Description:
-...
+#### Description
 
-#### Dimensions:
+This cube is feed by the process '}izi.process.message.add'. It contains process return messages.  
+It can be used in the user interface to indicate for example, errors that have occurred during the execution of a process.
+
+#### Dimensions
+
 * }izi.Year
 * }izi.Date
 * }izi.Time
 * }Processes
 * }izi.ProcessMessage
 
+#### Sample
+
+![Image](Image/}izi.ProcessMessage.cub.png?raw=true)
+
 ## Processes
 
 ### }izi.common.email.send.pro
 
-#### Description:
+#### Description
+
 Send an email using 'Send-MailMessage' powershell cmdlets.
 
-#### Parameters: 
+#### Parameters
+
 |Name|Type|Description|Default value
 |--------|--------|--------|----------------
 |pDebugMode|Numeric|[Optional] 0 = Nothing \| 1 = Write to }izi.ProcessMessage cube \| 2 = 1 + Keep temporary objects|0
@@ -84,180 +115,31 @@ Send an email using 'Send-MailMessage' powershell cmdlets.
 |pAttachments|String|[Optional] Path of a file to be attached to the email|
 |pWaitForExecution|Numeric|[Optional] 0 = Asynchronous execution \| 1 = Synchronous execution|1
 
-#### Dependencies:
+#### Dependencies
+
 * }izi.process.message.add
 
-#### Examples: 
-`...`
+#### Examples
 
+`...`
 
 ### }izi.common.url.encode.pro
 
-#### Description:
+#### Description
+
 ...
 
-#### Parameters: 
+#### Parameters
+
 |Name|Type|Description|Default value
 |--------|--------|--------|--------
 |pParam1|Numeric|[Optional] ...|0
 |pParam1|String|[Mandatory] ...|0
-  
-#### Dependencies:
-...
 
-#### Examples: 
+#### Dependencies
+
+* }izi.process.message.add
+
+#### Examples
+
 `...`
-  
-### }izi.cube.data.copy.pro
-
-#### Description:
-...
-
-#### Parameters: 
-|Name|Type|Description|Default value
-|--------|--------|--------|--------
-|pParam1|Numeric|[Optional] ...|0
-|pParam1|String|[Mandatory] ...|0
-  
-#### Dependencies:
-...
-
-#### Examples: 
-`...`
-  
-### }izi.cube.data.populaterandomly.pro
-
-#### Description:
-...
-
-#### Parameters: 
-|Name|Type|Description|Default value
-|--------|--------|--------|--------
-|pParam1|Numeric|[Optional] ...|0
-|pParam1|String|[Mandatory] ...|0
-  
-#### Dependencies:
-...
-
-#### Examples: 
-`...`
-  
-### }izi.cube.data.split.pro
-
-#### Description:
-...
-
-#### Parameters: 
-|Name|Type|Description|Default value
-|--------|--------|--------|--------
-|pParam1|Numeric|[Optional] ...|0
-|pParam1|String|[Mandatory] ...|0
-  
-#### Dependencies:
-...
-
-#### Examples: 
-`...`
-  
-### }izi.cube.overfeedingcheckcube.create.pro
-
-#### Description:
-...
-
-#### Parameters: 
-|Name|Type|Description|Default value
-|--------|--------|--------|--------
-|pParam1|Numeric|[Optional] ...|0
-|pParam1|String|[Mandatory] ...|0
-  
-#### Dependencies:
-...
-
-#### Examples: 
-`...`
-  
-### }izi.dimension.consolidationhierarchy.createfromattribute.pro
-
-#### Description:
-...
-
-#### Parameters: 
-|Name|Type|Description|Default value
-|--------|--------|--------|--------
-|pParam1|Numeric|[Optional] ...|0
-|pParam1|String|[Mandatory] ...|0
-  
-#### Dependencies:
-...
-
-#### Examples: 
-`...`
-  
-### }izi.dimension.consolidationhierarchy.delete.pro
-
-#### Description:
-...
-
-#### Parameters: 
-|Name|Type|Description|Default value
-|--------|--------|--------|--------
-|pParam1|Numeric|[Optional] ...|0
-|pParam1|String|[Mandatory] ...|0
-  
-#### Dependencies:
-...
-
-#### Examples: 
-`...`
-  
-### }izi.dimension.element.lock.pro
-
-#### Description:
-...
-
-#### Parameters: 
-|Name|Type|Description|Default value
-|--------|--------|--------|--------
-|pParam1|Numeric|[Optional] ...|0
-|pParam1|String|[Mandatory] ...|0
-  
-#### Dependencies:
-...
-
-#### Examples: 
-`...`
-  
-### }izi.dimension.importfromfile.pro
-
-#### Description:
-...
-
-#### Parameters: 
-|Name|Type|Description|Default value
-|--------|--------|--------|--------
-|pParam1|Numeric|[Optional] ...|0
-|pParam1|String|[Mandatory] ...|0
-  
-#### Dependencies:
-...
-
-#### Examples: 
-`...`
-  
-### }izi.process.message.add.pro
-
-#### Description:
-...
-
-#### Parameters: 
-|Name|Type|Description|Default value
-|--------|--------|--------|--------
-|pParam1|Numeric|[Optional] ...|0
-|pParam1|String|[Mandatory] ...|0
-  
-#### Dependencies:
-...
-
-#### Examples: 
-`...`
-  
