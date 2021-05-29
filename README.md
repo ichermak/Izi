@@ -119,27 +119,51 @@ Send an email using 'Send-MailMessage' powershell cmdlets.
 
 * }izi.process.message.add
 
-#### Examples
+#### Example
 
-`...`
+`ExecuteProcess('}izi.common.email.send',
+     'pDebugMode', 0,
+     'pScriptDirectory', '',
+     'pSmtpServer', 'smtp.gmail.com',
+     'pPort', 587,
+     'pUseSsl', 1,
+     'pUser', 'Test',
+     'pPassword', 'Test1234$',
+     'pFrom', 'test.from@gmail.com',
+     'pTo', 'test.to.1@gmail.com, test.to.2@gmail.com',
+     'pCc', 'test.cc@gmail.com',
+     'pSubject', 'Subject',
+     'pPriority', 1,
+     'pBody', 'Body',
+     'pBodyAsHtml', 0,
+     'pEncoding', 6,
+     'pAttachments', '',
+     'pWaitForExecution', 1
+    );`
 
 ### }izi.common.url.encode.pro
 
 #### Description
 
-...
+Encode an Url.
 
 #### Parameters
 
 |Name|Type|Description|Default value
 |--------|--------|--------|--------
-|pParam1|Numeric|[Optional] ...|0
-|pParam1|String|[Mandatory] ...|0
+|pDebugMode|Numeric|[Optional] 0 = Nothing | 1 = Write to }izi.ProcessMessage cube | 2 = 1 + Keep temporary objects|0
+|pUrl|String|[Mandatory] Url|
 
 #### Dependencies
 
 * }izi.process.message.add
 
-#### Examples
+#### Example
 
-`...`
+`StringGlobalVariable('sProcessReturn');
+sProcessReturn = '';
+ExecuteProcess('}izi.common.url.encode',
+     'pDebugMode', 0,
+     'pUrl', 'http://localhost:9510/tm1web/UrlApi.jsp#Action=Open&AdminHost=localhost&TM1Server=Test&AccessType=Public&Type=Websheet&Workbook=Test report 1'
+    );
+sUrl = sProcessReturn;`
