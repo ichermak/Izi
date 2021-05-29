@@ -25,7 +25,7 @@ All tests were performed with:
 #### Description
 
 This dimension contains year elements from 2020 to 2060.
-![Image](../Image/}izi.Year.png?raw=true)
+![Image](Image/}izi.Year.png?raw=true)
 
 ### }izi.Date
 
