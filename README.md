@@ -243,7 +243,7 @@ This process supports only cubes having at maximum 20 dimensions.
 #### Description
 
 Create a new cube '\<CubeName> - OverfeedingCheck' cloning a given one to check the overfed cells.
-This process has been inspired by the Cubewise article below:
+This process has been inspired by the Cubewise article below:  
 https://code.cubewise.com/blog/how-to-find-out-where-you-overfeed-and-fix-it  
 This process supports only cubes having at maximum 30 dimensions.
 
