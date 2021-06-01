@@ -5,7 +5,7 @@ This project does not aim to compete with Bedrock library but to be complementar
 
 The particularities of this project are:
 
-* The usage of Powershell instead of Windows command, to ease the portability to Linux environement as the core version of Powershell, is now supported by Linux.
+* The usage of Powershell instead of Windows command, to ease the portability to Linux environement, as the core version of Powershell is now supported by Linux.
 * The usage of a cube for process return messages instead of logging them to the server log. The purpose is to be able to send messages back within PA user interfaces.
 
 # Global considerations
@@ -243,8 +243,8 @@ This process supports only cubes having at maximum 20 dimensions.
 #### Description
 
 Create a new cube '\<CubeName> - OverfeedingCheck' cloning a given one to check the overfed cells.
-This process has been inspired by the Cubewise article below
-https://code.cubewise.com/blog/how-to-find-out-where-you-overfeed-and-fix-it
+This process has been inspired by the Cubewise article below:
+https://code.cubewise.com/blog/how-to-find-out-where-you-overfeed-and-fix-it  
 This process supports only cubes having at maximum 30 dimensions.
 
 #### Parameters
