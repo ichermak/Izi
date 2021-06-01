@@ -133,7 +133,7 @@ Encode an Url.
 
 |Name|Type|Description|Default value
 |--------|--------|--------|--------
-|pDebugMode|Numeric|[Optional] 0 = Nothing | 1 = Write to }izi.ProcessMessage cube | 2 = 1 + Keep temporary objects|0
+|pDebugMode|Numeric|[Optional] 0 = Nothing \| 1 = Write to }izi.ProcessMessage cube \| 2 = 1 + Keep temporary objects|0
 |pUrl|String|[Mandatory] Url|
 
 #### Dependencies
@@ -155,19 +155,46 @@ This process supports only cubes having at maximum 20 dimensions.
 
 |Name|Type|Description|Default value
 |--------|--------|--------|--------
-|pDebugMode|Numeric|[Optional] 0 = Nothing | 1 = Write to }izi.ProcessMessage cube | 2 = 1 + Keep temporary objects|0
+|pDebugMode|Numeric|[Optional] 0 = Nothing \| 1 = Write to }izi.ProcessMessage cube \| 2 = 1 + Keep temporary objects|0
 |pCube|String|[Mandatory] Cube name|
 |pMappingElement|String|[Mandatory] Map source elements to target elements using format 'DimName1 : SourceElement -> TargetElement & DimName2 : SourceElement -> TargetElement'|
 |pMappingDelimiter|String|[Optional] Delimiter between mapping specifications in pMappingElement|&
 |pDimensionDelimiter|String|[Optional] Delimiter between dimensions names and source elements in pMappingElement|:
 |pElementDelimiter|String|[Optional] Delimiter between source elements and target elements in pMappingElement|->
-|pSkipRuleValues|Numeric|[Optional] 0 = Nothing | 1 = Skip rule values in source view|0
-|pSkipCalcs|Numeric|[Optional] 0 = Nothing | 1 = Skip consolidated values in source view|0
-|pSkipZeroes|Numeric|[Optional] 0 = Nothing | 1 = Skip zero values in source view|1
-|pZeroOut|Numeric|[Optional] 0 = Nothing | 1 = Zero out target view|1
+|pSkipRuleValues|Numeric|[Optional] 0 = Nothing \| 1 = Skip rule values in source view|0
+|pSkipCalcs|Numeric|[Optional] 0 = Nothing \| 1 = Skip consolidated values in source view|0
+|pSkipZeroes|Numeric|[Optional] 0 = Nothing \| 1 = Skip zero values in source view|1
+|pZeroOut|Numeric|[Optional] 0 = Nothing \| 1 = Zero out target view|1
 |pCoefficient|Numeric|[Optional] Multiply source value by coefficient. To keeps the value as is, put this parameter value to 1|1
-|pIncrement|Numeric|[Optional] 0 = Use CellPutN | 1 = Use CellIncrementN|0
-|pSubtractFromSource|Numeric|[Optional] 0 = Nothing | 1 = Subtract the copied value from the source|0
+|pIncrement|Numeric|[Optional] 0 = Use CellPutN \| 1 = Use CellIncrementN|0
+|pSubtractFromSource|Numeric|[Optional] 0 = Nothing \| 1 = Subtract the copied value from the source|0
+
+#### Dependencies
+
+* }izi.process.message.add
+
+#### Example
+
+`...`
+
+### }izi.cube.data.populaterandomly.pro
+
+#### Description
+
+Populate a cube randomly. 
+This process supports only cubes having at maximum 20 dimensions.
+
+#### Parameters
+
+|Name|Type|Description|Default value
+|--------|--------|--------|--------
+|pDebugMode|Numeric|[Optional] 0 = Nothing \| 1 = Write to }izi.ProcessMessage cube \| 2 = 1 + Keep temporary objects|0
+|pCube|String|[Mandatory] Cube name|
+|pFilter|String|[Optional] Filter on cube in format 'Year: 2006 + 2007 & Scenario: Actual + Budget'. Blank for whole cube|
+|pFilterDelimiter|String|[Optional] Filter delimiter|&
+|pDimensionDelimiter|String|[Optional] Dimension delimiter|:
+|pElementDelimiter|String|[Optional] Element delimiter|+
+|pMaxRecord|Numeric|[Optional] Maximum number of cells to populate. 0 = The whole cube|0
 
 #### Dependencies
 
