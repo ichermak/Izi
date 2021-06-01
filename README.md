@@ -203,3 +203,37 @@ This process supports only cubes having at maximum 20 dimensions.
 #### Example
 
 `...`
+
+### }izi.cube.data.split.pro
+
+#### Description
+
+Copy data from a source intersections to target ones, applying weights.
+The sources, targets and there weights are defined within a given csv file.
+This process supports only cubes having at maximum 20 dimensions.
+
+#### Parameters
+
+|Name|Type|Description|Default value
+|--------|--------|--------|--------
+|pDebugMode|Numeric|[Optional] 0 = Nothing \| 1 = Write to }izi.ProcessMessage cube \| 2 = 1 + Keep temporary objects|0
+|pCubeList|String|[Mandatory] Target cube list (Example : 'CubeName1 ; CubeName2 ; CubeName3')|
+|pCubeDelimiter|String|[Optional] Cube delimiter|;
+|pFilePath|String|[Mandatory] Source file path (Example : 'C:\Applications\Tm1\Izi\Interface\Inbound\Test.csv'|
+|pFileDelimiter|String|[Optional] Source delimiter|;
+|pQuoteCharacter|String|[Optional] Quote character|
+|pDecimalSeparator|String|[Optional] Decimal separator|,
+|pThousandsSeparator|String|[Optional] Thousands separator|
+|pWeightHeaderName|String|[Optional] Weight header name|\<Weight>
+|pMappingDelimiter|String|[Optional] Mapping delimiter. Must be not used in dimension name or element name.|&
+|pDimensionDelimiter|String|[Optional] Dimension delimiter. Must be not used in dimension name or element name.|:
+|pElementDelimiter|String|[Optional] Element delimiter. Must be not used in dimension name or element name.|->
+
+#### Dependencies
+
+* }izi.process.message.add
+* }izi.cube.data.copy
+
+#### Example
+
+`...`
