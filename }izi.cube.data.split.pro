@@ -4,7 +4,7 @@
 586,"C:\Template.csv"
 585,"C:\Template.csv"
 564,
-565,"hVFgR<tIaMhE;0R@eh=^y62z`4Dz=HDAH<2U\cT1KwCt:b^]720iO>EVU]_6:ZI\`S]au_vbn7_lafvAQN]K[eQ[e2]01cc4fBMAqJ9[u\ZV]0k:jY?cFKF_hgkF:3@E_sxsUvj73tul^YDtUT]iRR;ExY0P`[TvtUZbpC0FhyDniz^EQcMci4Q7AO;iiaA=7RdLpr\y"
+565,"fT]G53aUo@=aYCFHFOI?vm2VFtLVC<SEC==28O9vHT:G<[2V6uTMm=yBscxFXxukU0lEc2Z@IAgSBM8SKxIYO]lU12hIeid:nDldbMOGr>j]05xAsFDpnrB[st9mGKZYXv>EDE0R=Z^4>rouXLXFzMcx8:hxz7ss>Uw0wvGjJoj2ej_xdG_8QH@C4ERJO7aVGsxn2HL<"
 559,1
 928,0
 593,
@@ -758,7 +758,7 @@ Else;
         EndIf;
         
         sCube = sText;
-        sProcessName = '}3ds.cube.data.copy';
+        sProcessName = '}izi.cube.data.copy';
         nProcessReturnCode = ExecuteProcess(sProcessName,
                                             'pDebugMode', pDebugMode,
                                             'pCube', sCube,
