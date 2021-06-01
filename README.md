@@ -1,11 +1,11 @@
 # Izi
 
-A library of objects for IBM Planning Analytics (TM1) applications. This library gives a standard approach to common implementations and tasks.  
+A library of objects for IBM Planning Analytics (TM1) applications. This library gives a standard approach to common implementations.  
 This project does not aim to compete with Bedrock library but to be complementary with it.  
 
 The particularities of this project are:
 
-* The usage of Powershell instead of Windwos Command, to ease the portability to Linux environement as the core version of Powershell, is now supported by Linux.
+* The usage of Powershell instead of Windows command, to ease the portability to Linux environement as the core version of Powershell, is now supported by Linux.
 * The usage of a cube for process return messages instead of logging them to the server log. The purpose is to be able to send messages back within PA user interfaces.
 
 # Global considerations
@@ -143,3 +143,36 @@ Encode an Url.
 #### Example
 
 `StringGlobalVariable('sProcessReturn'); sProcessReturn = ''; ExecuteProcess('}izi.common.url.encode', 'pDebugMode', 0, 'pUrl', 'http://localhost:9510/tm1web/UrlApi.jsp#Action=Open&AdminHost=localhost&TM1Server=Test&AccessType=Public&Type=Websheet&Workbook=Test report 1'); sUrl = sProcessReturn;`
+
+### }izi.cube.data.copy.pro
+
+#### Description
+
+Intra cube data copy for a given cube using a parametrable element mapping.
+This process supports only cubes having at maximum 20 dimensions.
+
+#### Parameters
+
+|Name|Type|Description|Default value
+|--------|--------|--------|--------
+|pDebugMode|Numeric|[Optional] 0 = Nothing | 1 = Write to }izi.ProcessMessage cube | 2 = 1 + Keep temporary objects|0
+|pCube|String|[Mandatory] Cube name|
+|pMappingElement|String|[Mandatory] Map source elements to target elements using format 'DimName1 : SourceElement -> TargetElement & DimName2 : SourceElement -> TargetElement'|
+|pMappingDelimiter|String|[Optional] Delimiter between mapping specifications in pMappingElement|&
+|pDimensionDelimiter|String|[Optional] Delimiter between dimensions names and source elements in pMappingElement|:
+|pElementDelimiter|String|[Optional] Delimiter between source elements and target elements in pMappingElement|->
+|pSkipRuleValues|Numeric|[Optional] 0 = Nothing | 1 = Skip rule values in source view|0
+|pSkipCalcs|Numeric|[Optional] 0 = Nothing | 1 = Skip consolidated values in source view|0
+|pSkipZeroes|Numeric|[Optional] 0 = Nothing | 1 = Skip zero values in source view|1
+|pZeroOut|Numeric|[Optional] 0 = Nothing | 1 = Zero out target view|1
+|pCoefficient|Numeric|[Optional] Multiply source value by coefficient. To keeps the value as is, put this parameter value to 1|1
+|pIncrement|Numeric|[Optional] 0 = Use CellPutN | 1 = Use CellIncrementN|0
+|pSubtractFromSource|Numeric|[Optional] 0 = Nothing | 1 = Subtract the copied value from the source|0
+
+#### Dependencies
+
+* }izi.process.message.add
+
+#### Example
+
+`...`
