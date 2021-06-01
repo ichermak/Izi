@@ -237,3 +237,28 @@ This process supports only cubes having at maximum 20 dimensions.
 #### Example
 
 `...`
+
+### }izi.cube.overfeedingcheckcube.create.pro
+
+#### Description
+
+Create a new cube '\<CubeName> - OverfeedingCheck' cloning a given one to check the overfed cells.
+This process has been inspired by the Cubewise article below
+https://code.cubewise.com/blog/how-to-find-out-where-you-overfeed-and-fix-it
+This process supports only cubes having at maximum 30 dimensions.
+
+#### Parameters
+
+|Name|Type|Description|Default value
+|--------|--------|--------|--------
+|pDebugMode|Numeric|[Optional] 0 = Nothing \| 1 = Write to }izi.ProcessMessage cube \| 2 = 1 + Keep temporary objects|0
+|pCube|String|[Mandatory] Cube name|
+
+#### Dependencies
+
+* }izi.process.message.add
+* }izi.system.file.getcontent
+
+#### Example
+
+`...`
