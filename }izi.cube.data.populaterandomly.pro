@@ -4,7 +4,7 @@
 586,"Template"
 585,"Template"
 564,
-565,"hGUWb0tnaqJS8qcJed@[0K\BhhUc8JP3ec`XMp^22>NQk0J0E\o^cbTvsQ?C9YxH04nQv;R\mqvAj8Y3`CpdR7uxSVhKCLZO?Kr69JK1:C5FxnrO2y8RG?UZfEyV0_3ox^gSOM9HSP]]=K28FVoI1kw7H`ZViWD;Pv?y]K4ir3<3<hK@LT09G\9fi_ezmiPB1KV0mOZy"
+565,"qSk9tyU\2iaW@m_t[a;Db1CfZeAX6yvdOg=5hdZq9lyD6Z>>Y:VfdVixaJ431I4VbF^m8PHDO1>SKp\Ho@ES?Yen1G8CYvnY:ntN0_iyDrYsG5K^mRxQyBOOzZaYF_tQhHJI>J9e9rxfKYgsSq68VH9hCDsVk\bgqddHPU0g[NNCoqTm2bSsh[i?_U:XsRM7Sad1Bw2W"
 559,1
 928,0
 593,
@@ -25,15 +25,17 @@
 569,0
 592,0
 599,1000
-560,7
+560,8
 pDebugMode
+pSetUseActiveSandbox
 pCube
 pFilter
 pFilterDelimiter
 pDimensionDelimiter
 pElementDelimiter
 pMaxRecord
-561,7
+561,8
+1
 1
 2
 2
@@ -41,16 +43,18 @@ pMaxRecord
 2
 2
 1
-590,7
+590,8
 pDebugMode,0
+pSetUseActiveSandbox,0
 pCube,""
 pFilter,""
 pFilterDelimiter,"&"
 pDimensionDelimiter,":"
 pElementDelimiter,"+"
 pMaxRecord,0
-637,7
+637,8
 pDebugMode,"[Optional] 0 = Nothing | 1 = Write to }izi.ProcessMessage cube | 2 = 1 + Keep temporary objects"
+pSetUseActiveSandbox,"[Optional] 0 = Reads and writes to the base data | 1 = Reads and writes to the user's active sandbox"
 pCube,"[Mandatory] Cube name"
 pFilter,"[Optional] Filter on cube in format 'Year: 2006 + 2007 & Scenario: Actual + Budget'. Blank for whole cube"
 pFilterDelimiter,"[Optional] Filter delimiter"
@@ -184,7 +188,7 @@ VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
 603,0
-572,267
+572,269
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -197,7 +201,7 @@ VarType=32ColType=827
 # https://github.com/ichermak/Izi
 
 # ====================================================================================================
-# Description : Populate a cube randomly. 
+# Description : Populates a cube with random data. 
 #               This process supports only cubes having at maximum 20 dimensions.
 #
 # Updates :
@@ -215,6 +219,8 @@ NumericGlobalVariable('nProcessReturn');
 StringGlobalVariable('sProcessReturn');
 nProcessReturn = 0;
 sProcessReturn = '';
+
+SetUseActiveSandboxProperty(pSetUseActiveSandbox);
 
 
 # === CONSTANT VARIABLES 

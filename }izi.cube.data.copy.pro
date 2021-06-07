@@ -4,7 +4,7 @@
 586,"Template"
 585,"Template"
 564,
-565,"eD?t0aso\[ooeUMYz>zhQYndSOYbU;o1]RP]?Mq_6q:r9s;q484cB]^Vo[A?k@LQbEr8c9dXIfu6HGe`c]It:BqoZr8Z:fxE4Kop\sy6lDz;Ql03NQ`\HEZ=7jdfG^;TeRzZgo:J>JNqCLbst31:zc4[e:_b2Urgmj>V<_>EDeB]pY7UQElBNk::`YyfdJ83;d2?q94H"
+565,"kKPP?0^0:@aaEPEsYlGRVq__F?G1_tctMA]J;gi<d;S:IOYyPCYXrkAJPbZN9lMPHpBJ7DD9b7;RoTKgBF8K;G19>k>?t9Jj=Lal0fhaNa`NMy_Y7J4UM\2GQ8@ZXvu9KIgT_I_hFU1Utt;4a4U;pAezX;G4x^mMMEUT7c:LC?hiYME6TW=H61Al?Rrva[CQE:D8CP9>"
 559,1
 928,0
 593,
@@ -25,8 +25,9 @@
 569,0
 592,0
 599,1000
-560,13
+560,14
 pDebugMode
+pSetUseActiveSandbox
 pCube
 pMappingElement
 pMappingDelimiter
@@ -39,7 +40,8 @@ pZeroOut
 pCoefficient
 pIncrement
 pSubtractFromSource
-561,13
+561,14
+1
 1
 2
 2
@@ -53,8 +55,9 @@ pSubtractFromSource
 1
 1
 1
-590,13
+590,14
 pDebugMode,0
+pSetUseActiveSandbox,0
 pCube,""
 pMappingElement,""
 pMappingDelimiter,"&"
@@ -67,8 +70,9 @@ pZeroOut,1
 pCoefficient,1
 pIncrement,0
 pSubtractFromSource,0
-637,13
+637,14
 pDebugMode,"[Optional] 0 = Nothing | 1 = Write to }izi.ProcessMessage cube | 2 = 1 + Keep temporary objects"
+pSetUseActiveSandbox,"[Optional] 0 = Reads and writes to the base data | 1 = Reads and writes to the user's active sandbox"
 pCube,"[Mandatory] Cube name"
 pMappingElement,"[Mandatory] Map source elements to target elements using format 'DimName1 : SourceElement -> TargetElement & DimName2 : SourceElement -> TargetElement'"
 pMappingDelimiter,"[Optional] Delimiter between mapping specifications in pMappingElement"
@@ -209,7 +213,7 @@ VarType=32ColType=827
 VarType=32ColType=827
 IgnoredInputVarName=ValeurVarType=32ColType=1165
 603,0
-572,814
+572,816
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -240,6 +244,8 @@ NumericGlobalVariable('nProcessReturn');
 StringGlobalVariable('sProcessReturn');
 nProcessReturn = 0;
 sProcessReturn = '';
+
+SetUseActiveSandboxProperty(pSetUseActiveSandbox);
 
 
 # === CONSTANT VARIABLES 

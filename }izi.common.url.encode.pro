@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"jTNgvCDoe7aVUw5I1u^TS:k4S^7L;9JiijdyJd@5pUEY@aOBQ;or>FmX7nOPel742ULkBJMHJ_v1ex0lySmJkc4`^3>dQj@u:Me82d2BQSFYn?JweQhEC7W`1jovohe?WyRhG[FP5eutQQBPe0o[It_\7yh]tk8F?0sm;lwT:KG;V@SWrXCvLNQ7;HsVSH_WKDAYdZrL"
+565,"vpafoLAUrf;D;>P0eRNY\SakLz2ynZI3Oa2h\rCB8JJIghnVS\X0Q_dYyKoamrk<c@`N<D1_h\zTL>Ix\MxbWXzGg6XakZFHVKQL6:M]pc5JMKb0@e^\:4k:c4Sf8>>3sv7pN^0gI67LTcy8OiPlN]mw4kxchFr^=tsv3X<hNkzIIMH\BOh83\y\@kq443_zexl>?C[w"
 559,1
 928,0
 593,
@@ -57,7 +57,7 @@ pUrl,"[Mandatory] Url"
 # https://github.com/ichermak/Izi
 
 # ====================================================================================================
-# Description : Encode an Url.
+# Description : Encodes an Url.
 #
 # Updates :
 # 	- 2020/09/11 - Ifthen CHERMAK (www.linkedin.com/in/ichermak) : Creation

@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"ro[_:UBg7>A3eTU5dza5JZ7EDuSNpMAHRD0^5BHlBvCb1B5laRJEXz1KNNySHGQVJ[SGfqn@ut3Y^SuIX2];`mmyHpYNNrAuO@NM_iezoc]yxqEQDuI4LG0adexIL\7>[1\Wi51pA8I3IRLoX]nVUWLE]<]`OqZvjUq77hT=2]_wzPVX75RjE2Ci8KRaX11s?@[9=_Av"
+565,"hQ;t_gL0a<0p>S=vCPT>NUa_RLNmE0OWRTguAKq79=yTwVu0]mc\v=W;S<`awFRhrDN]@9^Ag6MQR8ht06SN`K98co0XZ:Q@dxnopawMXbjr9:9vPQ`B1h`Qr6qjl4p`WDqV1thsqXs\tTxADN]AHuR0lO?pi:i^Fagw@Wh@PWMCdT741vrANvU5lm`YoRIVQTbUYMD7"
 559,1
 928,0
 593,
@@ -65,7 +65,7 @@ pElement,"[Mandatory] Element name (Example : 'Actual')"
 # https://github.com/ichermak/Izi
 
 # ====================================================================================================
-# Description : Lock a dimension element with a given locker name
+# Description : Locks a dimension element with a given locker name.
 #
 # Updates :
 # 	- 2019/10/24 - Ifthen CHERMAK (www.linkedin.com/in/ichermak) : Creation    

@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"uJIYE4W]L4W]X50p1JaXuax7_SctTi3bj5<E4WlMq6JAY]>O^0@`5<d^]MlVXX1R1WcgeCUdZtlIFaUKQLmkHblT?vd4\<ctohh=8Qim^RsxogR>Izsun`H5:dISr5b=1Rt_6xLT0_I]Eeu03FD=`=MSc2g5JeFU=@9t8DF_MEVCzD9vTaEjWpc=evJl6;HVs3aBch8\"
+565,"zGyWYE\S=MHJ<FXFQ[fBH`fL5EaGX2f5r3bVRmf\]McMray>yD4mi8rMxzthGP`[Xktv`QS2m^qE6z67v7yfSop`E0Ka49`S85cq[jWusxpwuB3PEX]hq@xxRUX8nT4GiR;tkehgsS;GFE<NW7_hKbAp3GJ?xmmT;[y<lDKXht=Q6T25G70v>xRNayY13VV9;TcD?8Pr"
 559,1
 928,0
 593,
@@ -116,7 +116,7 @@ pWaitForExecution,"[Optional] 0 = Asynchronous execution | 1 = Synchronous execu
 # https://github.com/ichermak/Izi
 
 # ====================================================================================================
-# Description : Send an email using 'Send-MailMessage' powershell cmdlets.
+# Description : Sends an email using 'Send-MailMessage' powershell cmdlets.
 #
 # Updates :
 # 	- 2021/05/14 - Ifthen CHERMAK (www.linkedin.com/in/ichermak) : Creation

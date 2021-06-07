@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"t@=6Y2mRF:<>Wbq:f]nSa`fCE0d^52j]O_6n=f:G>n]]VVk9My>@IbYEKx\WkgG5hXYBfG\R=`1YEbG^RZvp?2J01Q6t1wtNPW^3I\w@hcp_rkSC]g2CU[nUMOlsamGsK1h21H^4]yWcP6sv0:I19Z\Zs<k6P4cFH`czI=HrppcF7;TDq[Nt6M0aW\=<\\M_t0v7]UH;"
+565,"tA:Y4iIopJz1Y;4SUZCUa@H1[2WhSJ7Tl:7atJ>?FRFK;jA<cC]aAlEW[4ZUTko49iFuF_MScBaS;euckr9V=lI9;O^Kp>pt<Oty?0t\`U=vKo_@@FXBx5s>_G8ScqZ1mO6I;0tIPlSpjz7mRFo1sXC_SW<Q_jW_Tm9tMepsvW7?BO<epWO0TZdhl6`KDR[:2GgurVWd"
 559,1
 928,0
 593,
@@ -56,7 +56,7 @@ pCube,"[Mandatory] Cube name"
 # https://github.com/ichermak/Izi
 
 # ====================================================================================================
-# Description : Create a new cube '<CubeName> - OverfeedingCheck' cloning a given one to check the overfed cells. 
+# Description : Creates a new cube '<CubeName> - OverfeedingCheck' cloning a given one to check the overfed cells. 
 #               This process has been inspired by the Cubewise article below
 #               https://code.cubewise.com/blog/how-to-find-out-where-you-overfeed-and-fix-it
 #               This process supports only cubes having at maximum 30 dimensions.

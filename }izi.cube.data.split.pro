@@ -4,7 +4,7 @@
 586,"C:\Template.csv"
 585,"C:\Template.csv"
 564,
-565,"fT]G53aUo@=aYCFHFOI?vm2VFtLVC<SEC==28O9vHT:G<[2V6uTMm=yBscxFXxukU0lEc2Z@IAgSBM8SKxIYO]lU12hIeid:nDldbMOGr>j]05xAsFDpnrB[st9mGKZYXv>EDE0R=Z^4>rouXLXFzMcx8:hxz7ss>Uw0wvGjJoj2ej_xdG_8QH@C4ERJO7aVGsxn2HL<"
+565,"pdO4zihQs>XmsO7Eae;fw?4HDHf5SXr6lHofuKPDVqK??078kld:2mOEiQ>hD6ep?j_pwDCRQ3gLh@XpG@HhWy?m3bmaG64QtuRbDe<@OD7]<qzon;Hp8SMbuOAIzbrYoL=K]r[9:53iO>m1B<TV7B4;VjX=d3jJN[OcbB4lx>hH7N:gH^sy1if^Y=C2=gLISu7Gnpoq"
 559,1
 928,0
 593,
@@ -25,8 +25,9 @@
 569,0
 592,0
 599,1000
-560,12
+560,13
 pDebugMode
+pSetUseActiveSandbox
 pCubeList
 pCubeDelimiter
 pFilePath
@@ -38,7 +39,8 @@ pWeightHeaderName
 pMappingDelimiter
 pDimensionDelimiter
 pElementDelimiter
-561,12
+561,13
+1
 1
 2
 2
@@ -51,8 +53,9 @@ pElementDelimiter
 2
 2
 2
-590,12
+590,13
 pDebugMode,0
+pSetUseActiveSandbox,0
 pCubeList,""
 pCubeDelimiter,";"
 pFilePath,""
@@ -64,8 +67,9 @@ pWeightHeaderName,"<Weight>"
 pMappingDelimiter,"&"
 pDimensionDelimiter,":"
 pElementDelimiter,"->"
-637,12
+637,13
 pDebugMode,"[Optional] 0 = Nothing | 1 = Write to }izi.ProcessMessage cube | 2 = 1 + Keep temporary objects"
+pSetUseActiveSandbox,"[Optional] 0 = Reads and writes to the base data | 1 = Reads and writes to the user's active sandbox"
 pCubeList,"[Mandatory] Target cube list (Example : 'CubeName1 ; CubeName2 ; CubeName3')"
 pCubeDelimiter,"[Optional] Cube delimiter"
 pFilePath,"[Mandatory] Source file path (Example : 'C:\Applications\Tm1\Izi\Interface\Inbound\Test.csv'"
@@ -330,7 +334,7 @@ VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
 603,0
-572,202
+572,204
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -362,6 +366,8 @@ NumericGlobalVariable('nProcessReturn');
 StringGlobalVariable('sProcessReturn');
 nProcessReturn = 0;
 sProcessReturn = '';
+
+SetUseActiveSandboxProperty(pSetUseActiveSandbox);
 
 
 # === CONSTANT VARIABLES 
@@ -537,7 +543,7 @@ nRecordCount = 0;
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
-574,244
+574,245
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -761,6 +767,7 @@ Else;
         sProcessName = '}izi.cube.data.copy';
         nProcessReturnCode = ExecuteProcess(sProcessName,
                                             'pDebugMode', pDebugMode,
+                                            'pSetUseActiveSandbox', pSetUseActiveSandbox,
                                             'pCube', sCube,
                                             'pMappingElement', sMappingElement,
                                             'pMappingDelimiter', pMappingDelimiter,
