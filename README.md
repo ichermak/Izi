@@ -91,7 +91,7 @@ It can be used in the user interface to indicate for example, errors that have o
 
 #### Description
 
-Send an email using 'Send-MailMessage' powershell cmdlets.
+Sends an email using 'Send-MailMessage' powershell cmdlets.
 
 #### Parameters
 
@@ -127,7 +127,7 @@ Send an email using 'Send-MailMessage' powershell cmdlets.
 
 #### Description
 
-Encode an Url.
+Encodes an Url.
 
 #### Parameters
 
@@ -156,6 +156,7 @@ This process supports only cubes having at maximum 20 dimensions.
 |Name|Type|Description|Default value
 |--------|--------|--------|--------
 |pDebugMode|Numeric|[Optional] 0 = Nothing \| 1 = Write to }izi.ProcessMessage cube \| 2 = 1 + Keep temporary objects|0
+|pSetUseActiveSandbox|Numeric|[Optional] 0 = Reads and writes to the base data \| 1 = Reads and writes to the user's active sandbox|0
 |pCube|String|[Mandatory] Cube name|
 |pMappingElement|String|[Mandatory] Map source elements to target elements using format 'DimName1 : SourceElement -> TargetElement & DimName2 : SourceElement -> TargetElement'|
 |pMappingDelimiter|String|[Optional] Delimiter between mapping specifications in pMappingElement|&
@@ -181,7 +182,7 @@ This process supports only cubes having at maximum 20 dimensions.
 
 #### Description
 
-Populate a cube randomly. 
+Populates a cube with random data.
 This process supports only cubes having at maximum 20 dimensions.
 
 #### Parameters
@@ -189,12 +190,122 @@ This process supports only cubes having at maximum 20 dimensions.
 |Name|Type|Description|Default value
 |--------|--------|--------|--------
 |pDebugMode|Numeric|[Optional] 0 = Nothing \| 1 = Write to }izi.ProcessMessage cube \| 2 = 1 + Keep temporary objects|0
+|pSetUseActiveSandbox|Numeric|[Optional] 0 = Reads and writes to the base data \| 1 = Reads and writes to the user's active sandbox|0
 |pCube|String|[Mandatory] Cube name|
 |pFilter|String|[Optional] Filter on cube in format 'Year: 2006 + 2007 & Scenario: Actual + Budget'. Blank for whole cube|
 |pFilterDelimiter|String|[Optional] Filter delimiter|&
 |pDimensionDelimiter|String|[Optional] Dimension delimiter|:
 |pElementDelimiter|String|[Optional] Element delimiter|+
 |pMaxRecord|Numeric|[Optional] Maximum number of cells to populate. 0 = The whole cube|0
+
+#### Dependencies
+
+* }izi.process.message.add
+
+#### Example
+
+`...`
+
+### }izi.cube.data.putnumericvalue.pro
+
+#### Description
+
+Sends or increments a numeric value to a cube cell.
+This process supports only cubes having at maximum 30 dimensions.
+
+#### Parameters
+
+|Name|Type|Description|Default value
+|--------|--------|--------|--------
+|pDebugMode|Numeric|[Optional] 0 = Nothing \| 1 = Write to }izi.ProcessMessage cube \| 2 = 1 + Keep temporary objects|0
+|pSetUseActiveSandbox|Numeric|[Optional] 0 = Reads and writes to the base data \| 1 = Reads and writes to the user's active sandbox|0
+|pIncrement|Numeric|[Optional] 0 = Use CellPutN \| 1 = Use CellIncrementN|0
+|pValue|Numeric|[Mandatory] Value to put|0
+|pCube|String|[Mandatory] Cube name|
+|pElement1|String|[Mandatory] Dimension element name|
+|pElement2|String|[Mandatory] Dimension element name|
+|pElement3|String|[Optional] Dimension element name|
+|pElement4|String|[Optional] Dimension element name|
+|pElement5|String|[Optional] Dimension element name|
+|pElement6|String|[Optional] Dimension element name|
+|pElement7|String|[Optional] Dimension element name|
+|pElement8|String|[Optional] Dimension element name|
+|pElement9|String|[Optional] Dimension element name|
+|pElement10|String|[Optional] Dimension element name|
+|pElement11|String|[Optional] Dimension element name|
+|pElement12|String|[Optional] Dimension element name|
+|pElement13|String|[Optional] Dimension element name|
+|pElement14|String|[Optional] Dimension element name|
+|pElement15|String|[Optional] Dimension element name|
+|pElement16|String|[Optional] Dimension element name|
+|pElement17|String|[Optional] Dimension element name|
+|pElement18|String|[Optional] Dimension element name|
+|pElement19|String|[Optional] Dimension element name|
+|pElement20|String|[Optional] Dimension element name|
+|pElement21|String|[Optional] Dimension element name|
+|pElement22|String|[Optional] Dimension element name|
+|pElement23|String|[Optional] Dimension element name|
+|pElement24|String|[Optional] Dimension element name|
+|pElement25|String|[Optional] Dimension element name|
+|pElement26|String|[Optional] Dimension element name|
+|pElement27|String|[Optional] Dimension element name|
+|pElement28|String|[Optional] Dimension element name|
+|pElement29|String|[Optional] Dimension element name|
+|pElement30|String|[Optional] Dimension element name|
+
+#### Dependencies
+
+* }izi.process.message.add
+
+#### Example
+
+`...`
+
+### }izi.cube.data.putstringvalue.pro
+
+#### Description
+
+Sends a string value to a cube cell.
+This process supports only cubes having at maximum 30 dimensions.
+
+#### Parameters
+
+|Name|Type|Description|Default value
+|--------|--------|--------|--------
+|pDebugMode|Numeric|[Optional] 0 = Nothing \| 1 = Write to }izi.ProcessMessage cube \| 2 = 1 + Keep temporary objects|0
+|pSetUseActiveSandbox|Numeric|[Optional] 0 = Reads and writes to the base data \| 1 = Reads and writes to the user's active sandbox|0
+|pValue|String|[Mandatory] Value to put|
+|pCube|String|[Mandatory] Cube name|
+|pElement1|String|[Mandatory] Dimension element name|
+|pElement2|String|[Mandatory] Dimension element name|
+|pElement3|String|[Optional] Dimension element name|
+|pElement4|String|[Optional] Dimension element name|
+|pElement5|String|[Optional] Dimension element name|
+|pElement6|String|[Optional] Dimension element name|
+|pElement7|String|[Optional] Dimension element name|
+|pElement8|String|[Optional] Dimension element name|
+|pElement9|String|[Optional] Dimension element name|
+|pElement10|String|[Optional] Dimension element name|
+|pElement11|String|[Optional] Dimension element name|
+|pElement12|String|[Optional] Dimension element name|
+|pElement13|String|[Optional] Dimension element name|
+|pElement14|String|[Optional] Dimension element name|
+|pElement15|String|[Optional] Dimension element name|
+|pElement16|String|[Optional] Dimension element name|
+|pElement17|String|[Optional] Dimension element name|
+|pElement18|String|[Optional] Dimension element name|
+|pElement19|String|[Optional] Dimension element name|
+|pElement20|String|[Optional] Dimension element name|
+|pElement21|String|[Optional] Dimension element name|
+|pElement22|String|[Optional] Dimension element name|
+|pElement23|String|[Optional] Dimension element name|
+|pElement24|String|[Optional] Dimension element name|
+|pElement25|String|[Optional] Dimension element name|
+|pElement26|String|[Optional] Dimension element name|
+|pElement27|String|[Optional] Dimension element name|
+|pElement28|String|[Optional] Dimension element name|
+|pElement29|String|[Optional] Dimension element name|
+|pElement30|String|[Optional] Dimension element name|
 
 #### Dependencies
 
@@ -217,6 +328,7 @@ This process supports only cubes having at maximum 20 dimensions.
 |Name|Type|Description|Default value
 |--------|--------|--------|--------
 |pDebugMode|Numeric|[Optional] 0 = Nothing \| 1 = Write to }izi.ProcessMessage cube \| 2 = 1 + Keep temporary objects|0
+|pSetUseActiveSandbox|Numeric|[Optional] 0 = Reads and writes to the base data \| 1 = Reads and writes to the user's active sandbox|0
 |pCubeList|String|[Mandatory] Target cube list (Example : 'CubeName1 ; CubeName2 ; CubeName3')|
 |pCubeDelimiter|String|[Optional] Cube delimiter|;
 |pFilePath|String|[Mandatory] Source file path (Example : 'C:\Applications\Tm1\Izi\Interface\Inbound\Test.csv'|
@@ -242,7 +354,7 @@ This process supports only cubes having at maximum 20 dimensions.
 
 #### Description
 
-Create a new cube '\<CubeName> - OverfeedingCheck' cloning a given one to check the overfed cells.
+Creates a new cube '\<CubeName> - OverfeedingCheck' cloning a given one to check the overfed cells.
 This process has been inspired by the Cubewise article below:  
 https://code.cubewise.com/blog/how-to-find-out-where-you-overfeed-and-fix-it  
 This process supports only cubes having at maximum 30 dimensions.
@@ -258,6 +370,29 @@ This process supports only cubes having at maximum 30 dimensions.
 
 * }izi.process.message.add
 * }izi.system.file.getcontent
+
+#### Example
+
+`...`
+
+### }izi.dimension.element.lock.pro
+
+#### Description
+
+Locks a dimension element with a given locker name.
+
+#### Parameters
+
+|Name|Type|Description|Default value
+|--------|--------|--------|--------
+|pDebugMode|Numeric|[Optional] 0 = Nothing \| 1 = Write to }izi.ProcessMessage cube \| 2 = 1 + Keep temporary objects|0
+|pLocker|String|[Mandatory] Client name or blank to unlock the element (Example : 'Admin')|
+|pDimension|String|[Mandatory] Dimension name (Example : 'Scenario')|
+|pElement|String|[Mandatory] Element name (Example : 'Actual')|
+
+#### Dependencies
+
+* }izi.process.message.add
 
 #### Example
 
