@@ -148,7 +148,7 @@ Encodes an Url.
 
 #### Description
 
-Intra cube data copy for a given cube using a parametrable element mapping.
+Intra cube data copy for a given cube using a parametrable element mapping.  
 This process supports only cubes having at maximum 20 dimensions.
 
 #### Parameters
@@ -182,7 +182,7 @@ This process supports only cubes having at maximum 20 dimensions.
 
 #### Description
 
-Populates a cube with random data.
+Populates a cube with random data.  
 This process supports only cubes having at maximum 20 dimensions.
 
 #### Parameters
@@ -210,7 +210,7 @@ This process supports only cubes having at maximum 20 dimensions.
 
 #### Description
 
-Sends or increments a numeric value to a cube cell.
+Sends or increments a numeric value to a cube cell.  
 This process supports only cubes having at maximum 30 dimensions.
 
 #### Parameters
@@ -265,7 +265,7 @@ This process supports only cubes having at maximum 30 dimensions.
 
 #### Description
 
-Sends a string value to a cube cell.
+Sends a string value to a cube cell.  
 This process supports only cubes having at maximum 30 dimensions.
 
 #### Parameters
@@ -319,8 +319,8 @@ This process supports only cubes having at maximum 30 dimensions.
 
 #### Description
 
-Copy data from a source intersections to target ones, applying weights.
-The sources, targets and there weights are defined within a given csv file.
+Copy data from a source intersections to target ones, applying weights.  
+The sources, targets and there weights are defined within a given csv file.  
 This process supports only cubes having at maximum 20 dimensions.
 
 #### Parameters
@@ -354,7 +354,7 @@ This process supports only cubes having at maximum 20 dimensions.
 
 #### Description
 
-Creates a new cube '\<CubeName> - OverfeedingCheck' cloning a given one to check the overfed cells.
+Creates a new cube '\<CubeName> - OverfeedingCheck' cloning a given one to check the overfed cells.  
 This process has been inspired by the Cubewise article below:  
 https://code.cubewise.com/blog/how-to-find-out-where-you-overfeed-and-fix-it  
 This process supports only cubes having at maximum 30 dimensions.
