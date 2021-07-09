@@ -4,7 +4,7 @@
 586,"C:\Template.csv"
 585,"C:\Template.csv"
 564,
-565,"lE[_q`Ygq:joa3@xlRNm6bhTSbU4nnQA5jTTw?xxKG^6R7;Jq_;CLMZ[b4;eGgQ1?t[1lg8nMZbQf^m@t]0k_n^YrPC4O6TSxwgjUbdiZxLh3<oK3FS0r>yK;cnIGi:Gr\1_O^4?4rYqbwAcuW26:^jHywwrnWuoJNy;XNjoEEKQqOy?j:6b6GGKgsA2aD``^i4;h>>i"
+565,"gW>5skCaj1mT1J^YGFd>8WSY8A4zeEmkW`;DA?0YbIQgPDqEw8iK?yZOTNFphMC\Y2d?vhRbwj^oq=0\iImZOG:91BP8\dq=Qlo_Jy]y98\Z6y<MmXQWW7Ia_sbtv4hq?:7c@XcMQc@A27Ze@[s<K0FxEyvS2si<;;3RarHki[Fyw6richoTcOMv?9p\HupEmOT79NI\"
 559,1
 928,0
 593,
@@ -117,39 +117,39 @@ Alias2_9
 2
 2
 2
-1
 2
 2
 2
-1
 2
 2
 2
-1
 2
 2
 2
-1
 2
 2
 2
-1
 2
 2
 2
-1
 2
 2
 2
-1
 2
 2
 2
-1
 2
 2
 2
-1
+2
+2
+2
+2
+2
+2
+2
+2
+2
 2
 2
 2
@@ -277,45 +277,44 @@ Alias2_9
 VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
-VarType=33ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
-VarType=33ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
-VarType=33ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
-VarType=33ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
-VarType=33ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
-VarType=33ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
-VarType=33ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
-VarType=33ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
-VarType=33ColType=827
+VarType=32ColType=827
+VarType=32ColType=827
+VarType=32ColType=827
+VarType=32ColType=827
+VarType=32ColType=827
+VarType=32ColType=827
+VarType=32ColType=827
+VarType=32ColType=827
+VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
 603,0
-572,189
-
+572,190
 #****Begin: Generated Statements***
 #****End: Generated Statements****
 
@@ -431,6 +430,8 @@ If(sErrorMsg @<> '');
                     );
     EndIf;
     ProcessBreak;
+ 
+
 EndIf;
 
 
@@ -504,8 +505,7 @@ If(CubeExists(cElementAttributes) = 1);
     cElementAttributes_LoggingValue = CellGetS('}CubeProperties', cElementAttributes, 'LOGGING');
     CellPutS('', '}CubeProperties', cElementAttributes, 'LOGGING');
 EndIf;
-573,72
-
+573,71
 #****Begin: Generated Statements***
 #****End: Generated Statements****
 
@@ -516,7 +516,7 @@ nLeaf = 0;
 While(nIndex >= 1);
  	sElement = Expand('%' | 'Level_' | NumberToString(nIndex) | '%');
  	sWeight = Trim(Expand('%' | 'Weight_' | NumberToString(nIndex) | '%'));
- 	nWeight = StringToNumberEx(sWeight, pDecimalSeparator, pThousandSeparator);
+ 	nWeight = IF(sWeight @= '', 0, StringToNumberEx(sWeight, pDecimalSeparator, pThousandSeparator));
  	sParent = Expand('%' | 'Level_' | NumberToString(nIndex - 1) | '%');
  	If(sElement @<> '');
  	 	If(nLeaf = 0);
@@ -577,8 +577,7 @@ If(nLeaf = 0);
  	 	
  	EndIf;
 EndIf;
-574,36
-
+574,35
 #****Begin: Generated Statements***
 #****End: Generated Statements****
 
@@ -614,8 +613,7 @@ If(cAlias2Name @<> '');
  	 	nIndex = nIndex - 1;
  	End;
 EndIf;
-575,49
-
+575,48
 #****Begin: Generated Statements***
 #****End: Generated Statements****
 
@@ -664,7 +662,7 @@ If((pDebugMode = 1) % (pDebugMode = 2));
                 , 'pMessage', sNewMsg
                 ); 
 EndIf;
-576,CubeAction=1511DataAction=1503CubeLogChanges=0
+576,_ParameterConstraints=e30=
 930,0
 638,1
 804,0
@@ -696,7 +694,7 @@ EndIf;
 917,0
 918,1
 919,0
-920,50000
+920,0
 921,""
 922,""
 923,0
