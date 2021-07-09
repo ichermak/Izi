@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"rjb1Tn[h<RgLXCSj6bab`Zw3oRQm0Q>P<h_:zdt;2V^xEBl1sv\34Tmnu_TfHW\13p[rY9h3W\>pn5X2_]LMqBAF2NRm>dF]3bY;UiVcv8qdtEW1is6_ukHJnr6BR:yC2DBczCL^ZY6QCP0vK9Cr6IgX;mInE[le9wab_]9^D08wL4^sK\mg6wjB[Jx7Pbtr9dTt;v=z"
+565,"zuG7bIkesug:WYygO2h@^IOai2aC?aQCzOg0[Jgz`y[fevydUpobrW_JG[azR9LMCRClNQr0yjlO?uKGKPKR6TO<S=NRr3>_nof]eW?1YOHcsHr978MottjuJp9OLhN:F]oISTg1@iWEuA7z;G4O3wS6sehB]c=YKo=i:zx?lu;B9_7Ql85]aEQG_]6Vi>OsxV1bdk]v"
 559,1
 928,0
 593,
@@ -54,7 +54,7 @@ vMessage
 582,1
 VarType=32ColType=827
 603,0
-572,106
+572,111
 #****Begin: Generated Statements***
 #****End: Generated Statements****
 
@@ -137,6 +137,11 @@ EndIf;
 # ****************************************
 sTimestamp = TimSt(cStartTime, '\Y-\m-\d \h:\i:\s');
 sUser = cTM1User;
+If(CubeExists('}ElementAttributes_}Clients') = 1);
+    If(DimIx('}ElementAttributes_}Clients', '}TM1_DefaultDisplayValue') > 0);
+        sUser = CellGetS('}ElementAttributes_}Clients', cTM1User, '}TM1_DefaultDisplayValue');
+    EndIf;
+EndIf;
 sMessage = '';
 
 # *** Source settings
