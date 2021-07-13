@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"zuG7bIkesug:WYygO2h@^IOai2aC?aQCzOg0[Jgz`y[fevydUpobrW_JG[azR9LMCRClNQr0yjlO?uKGKPKR6TO<S=NRr3>_nof]eW?1YOHcsHr978MottjuJp9OLhN:F]oISTg1@iWEuA7z;G4O3wS6sehB]c=YKo=i:zx?lu;B9_7Ql85]aEQG_]6Vi>OsxV1bdk]v"
+565,"l>FtQlW5a?]vav4^RH;q8Uj5uvfK\A1`WXYMfR@s@X;k`;2wN_vBms]Wj?mbJ6;lrIj?b@1YCKq;F?VeiPdS\jF03ueth6egtu<oD4\9soucgSeMr9j9suItA;zfd\CAr_D@BIGK><4Y0wG=7m]x\U\kyh>e1Z>0jSY`tCbU?S:b:kNKxB_a\Jmtp^8cKGBO3ptk6UX7"
 559,1
 928,0
 593,
@@ -25,21 +25,25 @@
 569,0
 592,0
 599,1000
-560,3
+560,4
 pDebugMode
 pProcess
+pMessageType
 pMessage
-561,3
+561,4
 1
 2
 2
-590,3
+2
+590,4
 pDebugMode,0
 pProcess,""
+pMessageType,"Info"
 pMessage,""
-637,3
+637,4
 pDebugMode,"[Optional] 0 = Nothing | 1 = Write to }izi.ProcessMessage cube | 2 = 1 + Keep temporary objects"
 pProcess,"[Mandatory] Process name"
+pMessageType,"[Optional] Type of message (Example: 'Error')"
 pMessage,"[Mandatory] Could be a text or a path to a text file"
 577,1
 vMessage
