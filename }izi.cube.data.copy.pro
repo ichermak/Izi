@@ -4,7 +4,7 @@
 586,"Template"
 585,"Template"
 564,
-565,"i9fQpW6h8ao_T@Rs5fjZ71Zjk3MxwAo0CwQzqbQC`scQ?=lIf04mz\XxA9D<rI;JY]LFHR=Ds9G8FaXJwcjljPYl9Hbuqu1IkMcJ4uzylaf_UT<^?4mOWEOfvXv<@>zFQ@G8k@k<Q5bXybZ[HGp8]aM<OVc9zlA9vG^VWr9^XVeL]9kctXV_xD]]l:fjQvJDjbgpcOYw"
+565,"hJn7ZG2Ga>7nReiAU5QcZ^Io8QFnSkq_z9JOWic_OSm`^5FA94O`^rnl72<BkL@4[@T^_w5^u^9QGq2DNriO0nLYXf>ttr\Z:bLe87KgYs98@K`5aicFn2d44FZJGpYn9Bv:`Yhf[xCJ_pW2VCDxzJcdKQBUL>s^1U[2973zIaB[Bn<g`Gsl]yQ?NSfrm64EYz\<H^Rd"
 559,1
 928,0
 593,
@@ -213,7 +213,7 @@ VarType=32ColType=827
 VarType=32ColType=827
 IgnoredInputVarName=ValeurVarType=32ColType=1165
 603,0
-572,816
+572,818
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -282,6 +282,7 @@ If((pDebugMode = 1) % (pDebugMode = 2));
     ExecuteProcess('}izi.process.message.add'
                     , 'pProcess', cProcessName
                     , 'pMessage', sNewMsg
+                    , 'pMessageType', 'Info'
                     );
 EndIf;
 
@@ -354,6 +355,7 @@ If(sErrorMsg @<> '');
         ExecuteProcess('}izi.process.message.add'
                     , 'pProcess', cProcessName
                     , 'pMessage', sNewMsg
+                    , 'pMessageType', 'Error'
                    );
     EndIf;
     ProcessBreak;
@@ -1473,7 +1475,7 @@ ElseIf(nDimensionCount = 20);
     EndIf;
     
 EndIf;
-575,57
+575,64
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -1522,14 +1524,21 @@ If((pDebugMode = 1) % (pDebugMode = 2));
         ExecuteProcess('}izi.process.message.add'
                         , 'pProcess', cProcessName
                         , 'pMessage', sProcessErrorFilePath
+                        , 'pMessageType', 'Error'
                         ); 
     EndIf;
     
     sNewMsg = Expand('Process finished with : PrologMinorErrorCount=%PrologMinorErrorCount%, MetadataMinorErrorCount=%MetadataMinorErrorCount%, DataMinorErrorCount=%DataMinorErrorCount%.');
+    If((sErrorMsg @<> '') % (PrologMinorErrorCount + MetadataMinorErrorCount + DataMinorErrorCount > 0));
+        sMessageType = 'Error';
+    Else;
+        sMessageType = 'Info';
+    EndIf;
     ExecuteProcess('}izi.process.message.add'
                 , 'pProcess', cProcessName
                 , 'pMessage', sNewMsg
-                ); 
+                , 'pMessageType', sMessageType
+                );
 EndIf;
 576,CubeAction=1511DataAction=1503CubeLogChanges=0
 930,0

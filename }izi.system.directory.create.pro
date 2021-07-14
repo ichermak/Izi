@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"g7CE7@eahwz@EzjmEMPdpJ@hRnF02]iB9EPW>p@b0oVsb`;g>x:0r3LwV61M0SvrSYyI[\[^ZO]wI:DFvV;Cp\Cgr`WCMCjm:ebBgxQrZt[e\@075DNq9?0zM;^_>?E6\62`q:prPJzc5Ii0TJp@`Wi^kGmTubm9tA9`TPc]pwyFl5V<U=@:UJ_2pvEhB2Tt=WQ3_PKJ"
+565,"yNy=82_2>G0RzHakMlWe>DLn1a9eficHL?Lws@`jm:yIRzPgtJum2jQ;x9hs9iCb`343xu0ye_JwaVqB4d66\[QvaRA9i6ly?2TPZRF]9j6pu<U`VxqYrkmrU1jPXf029TUsqgQHk4lK_VxQQcX=_mu`gl7X<\UPL5hkoUe5^y;igxrhC]aiLlMRy1KAUda5bkYccT<b"
 559,1
 928,0
 593,
@@ -166,7 +166,7 @@ If((pDebugMode = 1) % (pDebugMode = 2));
     EndIf;
     
     sNewMsg = Expand('Process finished with : PrologMinorErrorCount=%PrologMinorErrorCount%, MetadataMinorErrorCount=%MetadataMinorErrorCount%, DataMinorErrorCount=%DataMinorErrorCount%.');
-    If(PrologMinorErrorCount + MetadataMinorErrorCount + DataMinorErrorCount > 0);
+    If((sErrorMsg @<> '') % (PrologMinorErrorCount + MetadataMinorErrorCount + DataMinorErrorCount > 0));
         sMessageType = 'Error';
     Else;
         sMessageType = 'Info';
