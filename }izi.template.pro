@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"mrH60Hz;sI]Wka75Y3xCyXT?eY>m7QTK0>Cv6te<dUqFIzIHUOOw6`dqJB_Y:A]gYUqn`k=gZ@rPggX<v8Kg7BFmvUyj3Y01LOoh_@`u\7S_bh1V0drFGZBuTO\3XZ\uB<fRYbv5]QiW60a`wZpiYa:V;TQ=Y17oBA?E=ZhPlnv9tKqW:rjon_4_mZyrrBFDv8WC4JJg"
+565,"u:hREdUpW?@?do1>th7d?aQEJinwO_7B_PX`Jun:5_Grrh=fBEjytHQvHz\4@D`4WjN`f_K`ws6cV<OwQzpdoqYRVodI^2a>lEoX7I7Ud?_6aMJN5]\A1nQ\Q3>?_oI7_U[lpdn@JaMRV4qSX?@?y5uDUx]r3NfxvY8?qi3cJIqGME2t?FTNbmVNv;KT[joc1JiuK;q]"
 559,1
 928,0
 593,
@@ -52,7 +52,7 @@ pParameter2,"[Mandatory / Optional] <Brief description> (Example : <Example valu
 581,0
 582,0
 603,0
-572,99
+572,101
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -93,10 +93,10 @@ SetUseActiveSandboxProperty(pSetUseActiveSandbox);
 # *** Standard variables 
 # **************************************** 
 cCrLf = Char(13) | Char(10);
-If(DimIx('}Clients', Tm1User) = 0); cTM1User = 'Chore'; Else; cTM1User = Tm1User; EndIf;
+If(DimIx('}Clients', Tm1User) = 0); cTM1User = 'Admin'; Else; cTM1User = Tm1User; EndIf;
 cStartTime = Now;
 cProcessName = GetProcessName;
-cIdExecution = cProcessName | '_' | TimSt(cStartTime, '\Y\m\d\h\i\s') | '_' | cTM1User  | '_' | Fill( '0', 5 - Long(NumberToString(Int(Rand * 65536)))) | NumberToString(Int(Rand * 65536));
+cIdExecution = cProcessName | '_' | TimSt(cStartTime, '\Y\m\d\h\i\s') | '_' | cTM1User  | '_' | Fill('0', 5 - Long(NumberToString(Int(Rand * 65536)))) | NumberToString(Int(Rand * 65536));
 cDebugFile = GetProcessErrorFileDirectory | cIdExecution | '.dbg';
 cTemporaryObject = 1;
 If(pDebugMode > 1); cTemporaryObject = 0; EndIf;
@@ -121,6 +121,7 @@ If((pDebugMode = 1) % (pDebugMode = 2));
     ExecuteProcess('}izi.process.message.add'
                 , 'pProcess', cProcessName
                 , 'pMessage', sNewMsg
+                , 'pMessageType', 'Info'
                 );
 EndIf;
 
@@ -143,6 +144,7 @@ If(sErrorMsg @<> '');
         ExecuteProcess('}izi.process.message.add'
                     , 'pProcess', cProcessName
                     , 'pMessage', sNewMsg
+                    , 'pMessageType', 'Error'
                     );
     EndIf;
     ProcessBreak;
@@ -160,7 +162,7 @@ EndIf;
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
-575,26
+575,33
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -178,14 +180,21 @@ If((pDebugMode = 1) % (pDebugMode = 2));
         ExecuteProcess('}izi.process.message.add'
                         , 'pProcess', cProcessName
                         , 'pMessage', sProcessErrorFilePath
+                        , 'pMessageType', 'Error'
                         ); 
     EndIf;
     
     sNewMsg = Expand('Process finished with : PrologMinorErrorCount=%PrologMinorErrorCount%, MetadataMinorErrorCount=%MetadataMinorErrorCount%, DataMinorErrorCount=%DataMinorErrorCount%.');
+    If(PrologMinorErrorCount + MetadataMinorErrorCount + DataMinorErrorCount > 0);
+        sMessageType = 'Error';
+    Else;
+        sMessageType = 'Info';
+    EndIf;
     ExecuteProcess('}izi.process.message.add'
                 , 'pProcess', cProcessName
                 , 'pMessage', sNewMsg
-                ); 
+                , 'pMessageType', sMessageType
+                );
 EndIf;
 576,CubeAction=1511DataAction=1503CubeLogChanges=0
 930,0

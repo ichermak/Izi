@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"uJDFU4C20Vr4iDibsf2e6aCdIhSfIMb5iI2]hjzGUk88@t@lF_JAydARcXdV4]>=:MfX0y1bbqS2W5yA5O0zW3l[5QBZ0;;=t>3480wiQug2ZYEl5k`qS:pX?yjGVD7u9YG^I]xuE^oJ7t4F4yJ6jv3IkQ`^roLW:_RO24PNBg@szdJ>EzqBr@Bz3[b^^OQ?myhouaHJ"
+565,"l@55^p:<Mr2DaBlmr?jlJvO[pio3SrJHFmIo[wkLLdcxwEiS^i@^UwCfq1CIMoRvV;>KdKjPlUk4u3:ZN>Hk2;TNA>;QopW0wlAwH?VlZavxJ6Xzz5\bMMN1i5M3Hb3Husvc4U`?UcpRn7j5m2k3Kt@ZiBn\=TM_Rmi:Xmt9U<0BaPesZ0EOid=QXUFpt`vvh;0^GmJ5"
 559,1
 928,0
 593,
@@ -217,10 +217,10 @@ SetUseActiveSandboxProperty(pSetUseActiveSandbox);
 # *** Standard variables 
 # **************************************** 
 cCrLf = Char(13) | Char(10);
-If(DimIx('}Clients', Tm1User) = 0); cTM1User = 'Chore'; Else; cTM1User = Tm1User; EndIf;
+If(DimIx('}Clients', Tm1User) = 0); cTM1User = 'Admin'; Else; cTM1User = Tm1User; EndIf;
 cStartTime = Now;
 cProcessName = GetProcessName;
-cIdExecution = cProcessName | '_' | TimSt(cStartTime, '\Y\m\d\h\i\s') | '_' | cTM1User  | '_' | Fill( '0', 5 - Long(NumberToString(Int(Rand * 65536)))) | NumberToString(Int(Rand * 65536));
+cIdExecution = cProcessName | '_' | TimSt(cStartTime, '\Y\m\d\h\i\s') | '_' | cTM1User  | '_' | Fill('0', 5 - Long(NumberToString(Int(Rand * 65536)))) | NumberToString(Int(Rand * 65536));
 cDebugFile = GetProcessErrorFileDirectory | cIdExecution | '.dbg';
 cTemporaryObject = 1;
 If(pDebugMode > 1); cTemporaryObject = 0; EndIf;

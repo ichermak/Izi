@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"pn=fy?ZCQ0ASyYvka`=]Yo81izK;SwqbCrGj5LomZryfE\Zsl_JNE`Le^Qr6Kib17OIOz6Cj4npQ;d39w9s>y>5A2`:CF;qR7jirqORu1CNUM5<\eL8t]I099HrMn2=V?<B^KGS8uw^zYAUNgSPXGhz0YXZwc<L`fLkanmyLicz_CnMOe36Iapq_1vsMA8R40n;lfuqj"
+565,"t5XlecorkcnDuJ_GUmY;aAs8=sKgWrXwZbR9Rz98;H7Hsj5x0A@U>fV@oIv`h?euJMg`XzV4RleLayRV285GZ:=?ED\Vc]1<LbO@sv0fq\D?zE?9F_6clg:rcwJ=Rlo6GKXStERECruyp2FJKoN]S]1JR_\rrws_0QEYR8>aD[p]acr?TT6kxf;wa9K=<DFQV1`A8t`0"
 559,1
 928,0
 593,
@@ -98,10 +98,10 @@ sProcessReturn = '';
 # *** Standard variables 
 # **************************************** 
 cCrLf = Char(13) | Char(10);
-If(DimIx('}Clients', Tm1User) = 0); cTM1User = 'Chore'; Else; cTM1User = Tm1User; EndIf;
+If(DimIx('}Clients', Tm1User) = 0); cTM1User = 'Admin'; Else; cTM1User = Tm1User; EndIf;
 cStartTime = Now;
 cProcessName = GetProcessName;
-cIdExecution = cProcessName | '_' | TimSt(cStartTime, '\Y\m\d\h\i\s') | '_' | cTM1User  | '_' | Fill( '0', 5 - Long(NumberToString(Int(Rand * 65536)))) | NumberToString(Int(Rand * 65536));
+cIdExecution = cProcessName | '_' | TimSt(cStartTime, '\Y\m\d\h\i\s') | '_' | cTM1User  | '_' | Fill('0', 5 - Long(NumberToString(Int(Rand * 65536)))) | NumberToString(Int(Rand * 65536));
 cDebugFile = GetProcessErrorFileDirectory | cIdExecution | '.dbg';
 cTemporaryObject = 1;
 If(pDebugMode > 1); cTemporaryObject = 0; EndIf;

@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"r[7GMUK[D[v>[e8Ke=aikQ4w:L_WNI0KMB[3_Li:GA=:_a6bO=GiELfSnJF;TuZpk5?aO`5XRayk_@3h5kWwbysDnMsFxr>jx8y@Kv6mgO;CA8YWHf@=Mpj59zu7wBp7vMjIyc:<NWd;@<l;wG?wdiS?HJ0g7MEY>^j<1ysFB02;tIwC]vECuHGXmzsGDE@2vYuycyN<"
+565,"v_GsX^ocqJ6RFM_YkfsqfuaOHRQ9?]vdx4LG:6w@JcT>B`l5:J2<VRs8[QXdi@RmtcXg_2xoRS@^xxV@YPidBt4PF5rE>Sh]UPVFOH2g>wo4I?dHjZMQF23S=x`m<dz3R[oqIgN>jQ;axiU[v`g2kjs>vSr=\xPGdA0pBhq1`3y9KlRnKkZ^?`S9AjKvbhyq6D=1vMxH"
 559,1
 928,0
 593,
@@ -90,7 +90,7 @@ sProcessReturn = '';
 # *** Standard variables 
 # **************************************** 
 cCrLf = Char(13) | Char(10);
-If(DimIx('}Clients', Tm1User) = 0); cTM1User = 'Chore'; Else; cTM1User = Tm1User; EndIf;
+If(DimIx('}Clients', Tm1User) = 0); cTM1User = 'Admin'; Else; cTM1User = Tm1User; EndIf;
 cStartTime = Now;
 cProcessName = GetProcessName;
 cIdExecution = cProcessName | '_' | TimSt(cStartTime, '\Y\m\d\h\i\s') | '_' | cTM1User  | '_' | Fill('0', 5 - Long(NumberToString(Int(Rand * 65536)))) | NumberToString(Int(Rand * 65536));

@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"zGyWYE\S=MHJ<FXFQ[fBH`fL5EaGX2f5r3bVRmf\]McMray>yD4mi8rMxzthGP`[Xktv`QS2m^qE6z67v7yfSop`E0Ka49`S85cq[jWusxpwuB3PEX]hq@xxRUX8nT4GiR;tkehgsS;GFE<NW7_hKbAp3GJ?xmmT;[y<lDKXht=Q6T25G70v>xRNayY13VV9;TcD?8Pr"
+565,"do8xawF;k2Ro\yAYzDpp]vpYa70ShplqLiXw<[C2[j?n[I5AIOf@Xz^^fsPvDmerqfUkL\d9Vu[bg^in7^Rl<IzNR;S8EnmV8OFYHV6cK2=w_KQ<ckeC4<Rap0=VsHsODjAksBIzP2IvaXL3=:lUA@DXH0@0YJ<5PYobqNttwP`NrXHKq4KUG95Iy[RDE]FRECDOI=pS"
 559,1
 928,0
 593,
@@ -141,7 +141,7 @@ sProcessReturn = '';
 # *** Standard variables 
 # **************************************** 
 cCrLf = Char(13) | Char(10);
-If(DimIx('}Clients', Tm1User) = 0); cTM1User = 'Chore'; Else; cTM1User = Tm1User; EndIf;
+If(DimIx('}Clients', Tm1User) = 0); cTM1User = 'Admin'; Else; cTM1User = Tm1User; EndIf;
 cStartTime = Now;
 cProcessName = GetProcessName;
 cIdExecution = cProcessName | '_' | TimSt(cStartTime, '\Y\m\d\h\i\s') | '_' | cTM1User  | '_' | Fill('0', 5 - Long(NumberToString(Int(Rand * 65536)))) | NumberToString(Int(Rand * 65536));

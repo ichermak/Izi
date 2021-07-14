@@ -4,7 +4,7 @@
 586,"C:\Template.csv"
 585,"C:\Template.csv"
 564,
-565,"pdO4zihQs>XmsO7Eae;fw?4HDHf5SXr6lHofuKPDVqK??078kld:2mOEiQ>hD6ep?j_pwDCRQ3gLh@XpG@HhWy?m3bmaG64QtuRbDe<@OD7]<qzon;Hp8SMbuOAIzbrYoL=K]r[9:53iO>m1B<TV7B4;VjX=d3jJN[OcbB4lx>hH7N:gH^sy1if^Y=C2=gLISu7Gnpoq"
+565,"cAnaBGg>sCYfuO@UxPCngx`9hgTK;QOKjNM<`06b`BgtS[o@88JerOTur0KWw3c<R8e:lTUf1?y@2=^37k5OAy^kRtJY]1GR[VBM6N?hr^HOM[\\ZHTvg<H^YXdp:hsq_Ae3Q>xGRTWGd1uKj]b>vxX<zVaGqP98v@2\ynxc7Xf:=8pp6wmwcFUW`pTcn_>iq3li0;`m"
 559,1
 928,0
 593,
@@ -376,7 +376,7 @@ SetUseActiveSandboxProperty(pSetUseActiveSandbox);
 # *** Standard variables 
 # **************************************** 
 cCrLf = Char(13) | Char(10);
-If(DimIx('}Clients', Tm1User) = 0); cTM1User = 'Chore'; Else; cTM1User = Tm1User; EndIf;
+If(DimIx('}Clients', Tm1User) = 0); cTM1User = 'Admin'; Else; cTM1User = Tm1User; EndIf;
 cStartTime = Now;
 cProcessName = GetProcessName;
 cIdExecution = cProcessName | '_' | TimSt(cStartTime, '\Y\m\d\h\i\s') | '_' | cTM1User  | '_' | Fill('0', 5 - Long(NumberToString(Int(Rand * 65536)))) | NumberToString(Int(Rand * 65536));
