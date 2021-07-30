@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"nfd@\zUKhDe;jNaWb[Agfjo>4Y3pWjg6R:2EpOFHh=j__D;>gM?9mfxh_rJGUrYkyAPnk`8^dtUx\IIZ;t?900l6HHdfaSXRw8Vle_DT[_do_Oa_rrYH1ZLo9YUS[A4162Sa92O;NA4DS>au9q^SCviv]dRVct4rGIF72]KnpoHLjiVRJjpRRG_D1?=e?z7d7Da2B3Mf"
+565,"mwKtNW9Jv\4]raoZ[_IXB?[rJXn5<6OmE=fgQ^DOLoy3w2bPMVwL:D[B>p=Gsh7KJAvPT51PMlKDJhHq4oY72WEDuQshLKxiJGD>dW0^VF^a\UAFtxY9::h6U:jFx?w7LM6gs1<clJ=12WV[r8n6MJFBF]xbuP5zZoZ;oin@Rxf9RbnDWB5b?FZ_7VvkDtJh>J;`m<sw"
 559,1
 928,0
 593,
@@ -58,7 +58,7 @@ vMessage
 582,1
 VarType=32ColType=827
 603,0
-572,144
+572,143
 #****Begin: Generated Statements***
 #****End: Generated Statements****
 
@@ -93,7 +93,8 @@ cCrLf = Char(13) | Char(10);
 If(DimIx('}Clients', Tm1User) = 0); cTM1User = 'Admin'; Else; cTM1User = Tm1User; EndIf;
 cStartTime = Now;
 cProcessName = GetProcessName;
-cIdExecution = cProcessName | '_' | TimSt(cStartTime, '\Y\m\d\h\i\s') | '_' | cTM1User  | '_' | Fill('0', 5 - Long(NumberToString(Int(Rand * 65536)))) | NumberToString(Int(Rand * 65536));
+cUserCode = ''; nMax = Long(cTM1User); nChar = 1; While(nChar <= nMax); If((Code(cTM1User, nChar) = 45) % ((Code(cTM1User, nChar) >= 65) & (Code(cTM1User, nChar) <= 90)) % ((Code(cTM1User, nChar) >= 97) & (Code(cTM1User, nChar) <= 122))); cUserCode = cUserCode | Subst(cTM1User, nChar, 1); EndIf; nChar = nChar + 1; End;
+cIdExecution = cProcessName | '_' | TimSt(cStartTime, '\Y\m\d\h\i\s') | '_' | cUserCode  | '_' | Fill('0', 5 - Long(NumberToString(Int(Rand * 65536)))) | NumberToString(Int(Rand * 65536));
 cDebugFile = GetProcessErrorFileDirectory | cIdExecution | '.dbg';
 cTemporaryObject = 1;
 If(pDebugMode > 1); cTemporaryObject = 0; EndIf;
@@ -158,21 +159,19 @@ nMillisecond = 86400000 * (nDateTime2 - INT(nDateTime2) - (nHour * (1 / 24)) - (
 
 sProcess = pProcess;
 sUser = cTM1User;
+If(CubeExists('}ElementAttributes_}Clients') = 1);
+    If(DimIx('}ElementAttributes_}Clients', '}TM1_DefaultDisplayValue') > 0);
+        sDefaultDisplayValue = CellGetS('}ElementAttributes_}Clients', sUser, '}TM1_DefaultDisplayValue');
+        If(Trim(sDefaultDisplayValue) @<> '');
+            sUser = sDefaultDisplayValue;
+        EndIf;
+    EndIf;
+EndIf;
 sYear = TimSt(nDateTime, '\Y');
 sDate = TimSt(nDateTime, '\m-\d');
 sTime = TimSt(nDateTime, '\h:\i:\s');
 sMillisecond = Fill('0', 3 - Long(NumberToString(INT(nMillisecond)))) | NumberToString(INT(nMillisecond));
-
 sTimeStamp = TimSt(nDateTime, '\Y-\m-\d \h:\i:\s') | '.' | sMillisecond;
-sUserDisplayValue = sUser;
-If(CubeExists('}ElementAttributes_}Clients') = 1);
-    If((DimIx('}Clients', sUserDisplayValue) > 0) & (DimIx('}ElementAttributes_}Clients', '}TM1_DefaultDisplayValue') > 0));
-        sUserDisplayValue = CellGetS('}ElementAttributes_}Clients', sUserDisplayValue, '}TM1_DefaultDisplayValue');
-    EndIf;
-EndIf;
-If(Trim(sUserDisplayValue) @= '');
-    sUserDisplayValue = sUser;
-EndIf;
 sMessageType = Trim(pMessageType);
 If(sMessageType @= '');
     sMessageType = 'Info';
@@ -245,7 +244,7 @@ If(sErrorMsg @= '');
     
     sMeasure = 'User Display Value';
     If(CellIsUpdateable(cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
-        CellPutS(sUserDisplayValue, cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
+        CellPutS(sUser, cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
     EndIf;
     
     sMeasure = 'Message Type';
@@ -272,7 +271,7 @@ If(sErrorMsg @= '');
     
     sMeasure = 'User Display Value';
     If(CellIsUpdateable(cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
-        CellPutS(sUserDisplayValue, cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
+        CellPutS(sUser, cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
     EndIf;
     
     sMeasure = 'Message Type';
@@ -307,7 +306,7 @@ Else;
         sMillisecond = '000';
         
         sTimeStamp = TimSt(nDateTime, '\Y-\m-\d \h:\i:\s');
-        sUserDisplayValue = cTM1User;
+        sUser = cTM1User;
         sMessageType = 'Error';
         sMessage = sErrorMsg;
         
@@ -328,7 +327,7 @@ Else;
         
         sMeasure = 'User Display Value';
         If(CellIsUpdateable(cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
-            CellPutS(sUserDisplayValue, cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
+            CellPutS(sUser, cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
         EndIf;
         
         sMeasure = 'Message Type';
@@ -355,7 +354,7 @@ Else;
         
         sMeasure = 'User Display Value';
         If(CellIsUpdateable(cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
-            CellPutS(sUserDisplayValue, cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
+            CellPutS(sUser, cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
         EndIf;
         
         sMeasure = 'Message Type';

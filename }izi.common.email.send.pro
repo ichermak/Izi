@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"exgV_awWx7W=676oHo@>>ZYzqt\?vC>mEUtZXz50ztgk]?9=:VrX^JO8_oSS;mP4yr=D>a4@KDaQu9>mZxcmqBmbdxBRICX=88WLTpga:Td>ijN>q==MiM5:\v:msjXBGi89AtHuA3^FJr_@Qo?NY8zk`s<juC_[R^uPV3f2Z?gQOe76;NA9KM1u2CF4M8AzSE@R^EOE"
+565,"qXzqy?R\<9P1L?AA?anCjO;b\M61Jd]X]b;=p9h17]NpFSUsgxN3TWPE<jtar;p4J<tMxRDSS:HIwRY2iP2nQ\M<d4C55jILLv4rF[a;DBklO]B[Vx5\7AdB^S9NnQ?Kj^LPuHRT5jbXt<m9`r@3dpITjnXnH?79ff9enLPy@SSFZid]^zTe=f3^SzmnK44j:zGXxFE>"
 559,1
 928,0
 593,
@@ -104,7 +104,7 @@ pWaitForExecution,"[Optional] 0 = Asynchronous execution | 1 = Synchronous execu
 581,0
 582,0
 603,0
-572,280
+572,281
 #****Begin: Generated Statements***
 #****End: Generated Statements****
 
@@ -144,7 +144,8 @@ cCrLf = Char(13) | Char(10);
 If(DimIx('}Clients', Tm1User) = 0); cTM1User = 'Admin'; Else; cTM1User = Tm1User; EndIf;
 cStartTime = Now;
 cProcessName = GetProcessName;
-cIdExecution = cProcessName | '_' | TimSt(cStartTime, '\Y\m\d\h\i\s') | '_' | cTM1User  | '_' | Fill('0', 5 - Long(NumberToString(Int(Rand * 65536)))) | NumberToString(Int(Rand * 65536));
+cUserCode = ''; nMax = Long(cTM1User); nChar = 1; While(nChar <= nMax); If((Code(cTM1User, nChar) = 45) % ((Code(cTM1User, nChar) >= 65) & (Code(cTM1User, nChar) <= 90)) % ((Code(cTM1User, nChar) >= 97) & (Code(cTM1User, nChar) <= 122))); cUserCode = cUserCode | Subst(cTM1User, nChar, 1); EndIf; nChar = nChar + 1; End;
+cIdExecution = cProcessName | '_' | TimSt(cStartTime, '\Y\m\d\h\i\s') | '_' | cUserCode  | '_' | Fill('0', 5 - Long(NumberToString(Int(Rand * 65536)))) | NumberToString(Int(Rand * 65536));
 cDebugFile = GetProcessErrorFileDirectory | cIdExecution | '.dbg';
 cTemporaryObject = 1;
 If(pDebugMode > 1); cTemporaryObject = 0; EndIf;

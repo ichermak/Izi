@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"zQ5joL?IJRLjhsM_1rgsWCJp81aSwQJFDN^p]jqGeO1?AYprQnR0:TG^@^FG91DHDk?A;R2vOgfKe6^\E4eq80]4N_w=yRUgEVN_<;OsNri0F0K<LgSj_WefCmcC]bWq5_2HEciUHIQXgF1[KnQ?q1^MFXKC=W2<@tH]Lprb?rvtoQ^E`0OF_TsZb3p2b^jIUw^p0lmS"
+565,"c>baShVEDj:xO>fFAL8c][]UHW?DI;szHCVBTcKAmS_u4?n8ZTdO0IgaBMI6VR9TmS]_^>VUAJKG8NFhqyZgclqdWs[cr7a`Xiv`S2lTlJfve?4o;Bek<x5g:ZSS2]cV6Ua?`BF=YOLXaSl\WM8bRJpQZx@MGieG_4>wk\2Me8dYtzk7rb>u`EG:>oF5[QSyn8Qi2c?Y"
 559,1
 928,0
 593,
@@ -60,7 +60,7 @@ pInsertionPoint,"[Optional] An existing dimension element. The element being add
 581,0
 582,0
 603,0
-572,165
+572,166
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -101,7 +101,8 @@ cCrLf = Char(13) | Char(10);
 If(DimIx('}Clients', Tm1User) = 0); cTM1User = 'Admin'; Else; cTM1User = Tm1User; EndIf;
 cStartTime = Now;
 cProcessName = GetProcessName;
-cIdExecution = cProcessName | '_' | TimSt(cStartTime, '\Y\m\d\h\i\s') | '_' | cTM1User  | '_' | Fill('0', 5 - Long(NumberToString(Int(Rand * 65536)))) | NumberToString(Int(Rand * 65536));
+cUserCode = ''; nMax = Long(cTM1User); nChar = 1; While(nChar <= nMax); If((Code(cTM1User, nChar) = 45) % ((Code(cTM1User, nChar) >= 65) & (Code(cTM1User, nChar) <= 90)) % ((Code(cTM1User, nChar) >= 97) & (Code(cTM1User, nChar) <= 122))); cUserCode = cUserCode | Subst(cTM1User, nChar, 1); EndIf; nChar = nChar + 1; End;
+cIdExecution = cProcessName | '_' | TimSt(cStartTime, '\Y\m\d\h\i\s') | '_' | cUserCode  | '_' | Fill('0', 5 - Long(NumberToString(Int(Rand * 65536)))) | NumberToString(Int(Rand * 65536));
 cDebugFile = GetProcessErrorFileDirectory | cIdExecution | '.dbg';
 cTemporaryObject = 1;
 If(pDebugMode > 1); cTemporaryObject = 0; EndIf;

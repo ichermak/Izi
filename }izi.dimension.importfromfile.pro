@@ -4,7 +4,7 @@
 586,"C:\Template.csv"
 585,"C:\Template.csv"
 564,
-565,"o?ov957@AVFmWY2aJj8JY1<hc]m29flfSdyN[Ic@AJ`3zyn47i9C;kN5DrBn6=vQQf<>\FWpe4FZ^0TUzAwFVc0fasaL=qeIjW`2Ue8GEVNqv[^9de5j8YsPWyDM7^wPON2OU6@<ffv2oBx<5d[Gisa67l7@d\8gUHxBk3ElDJQeccnZSp?Op\jtBzROS8w6X>vI[n2c"
+565,"i=J5rdsyaaux@I7KoljDp^EJl?sIRj^ZiBD`zwb\yiEudjhNNrqBl58kUphZ2c>E0OhLv3Lhv7STKk_=BN1_6yJamq3DjjSMq5O6re:D[k4`OTLK>oZk1siKSQXZ^v\e`IiB?W7iaY4_dl6\3BHO`QFnSR38?DU1B\Z\MfIz\EmSIsO7SzljhIJjmaG4Gqss0siObkqU"
 559,1
 928,0
 593,
@@ -314,7 +314,7 @@ VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
 603,0
-572,192
+572,193
 #****Begin: Generated Statements***
 #****End: Generated Statements****
 
@@ -355,7 +355,8 @@ cCrLf = Char(13) | Char(10);
 If(DimIx('}Clients', Tm1User) = 0); cTM1User = 'Admin'; Else; cTM1User = Tm1User; EndIf;
 cStartTime = Now;
 cProcessName = GetProcessName;
-cIdExecution = cProcessName | '_' | TimSt(cStartTime, '\Y\m\d\h\i\s') | '_' | cTM1User  | '_' | Fill('0', 5 - Long(NumberToString(Int(Rand * 65536)))) | NumberToString(Int(Rand * 65536));
+cUserCode = ''; nMax = Long(cTM1User); nChar = 1; While(nChar <= nMax); If((Code(cTM1User, nChar) = 45) % ((Code(cTM1User, nChar) >= 65) & (Code(cTM1User, nChar) <= 90)) % ((Code(cTM1User, nChar) >= 97) & (Code(cTM1User, nChar) <= 122))); cUserCode = cUserCode | Subst(cTM1User, nChar, 1); EndIf; nChar = nChar + 1; End;
+cIdExecution = cProcessName | '_' | TimSt(cStartTime, '\Y\m\d\h\i\s') | '_' | cUserCode  | '_' | Fill('0', 5 - Long(NumberToString(Int(Rand * 65536)))) | NumberToString(Int(Rand * 65536));
 cDebugFile = GetProcessErrorFileDirectory | cIdExecution | '.dbg';
 cTemporaryObject = 1;
 If(pDebugMode > 1); cTemporaryObject = 0; EndIf;
