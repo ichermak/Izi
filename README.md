@@ -50,6 +50,16 @@ This dimension contains time elements in the format 'hh:mm:ss'.
 
 ![Image](Image/}izi.Time.dim.png?raw=true)
 
+### }izi.Millisecond
+
+#### Description
+
+This dimension contains millisecond elements in the format '000'.
+
+#### Sample
+
+![Image](Image/}izi.Millisecond.dim.png?raw=true)
+
 ### }izi.ProcessMessage
 
 #### Description
@@ -78,6 +88,7 @@ It can be used in the user interface to indicate for example, errors that have o
 * }izi.Year
 * }izi.Date
 * }izi.Time
+* }izi.Millisecond
 * }Processes
 * }izi.ProcessMessage
 
