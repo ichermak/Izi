@@ -68,6 +68,8 @@ This dimension contains measure elements for process messages management:
 
 * Timestamp: Contains the timestamp of the message returned by the process.
 * User: Contains the name of the user who executed the process.
+* User Display Value: Contains the display name of a user. Based on the value of the user's }TM1_DefaultDisplayValue attribute.
+* Message Type: Contains the type of message returned by the process.
 * Message: Contains The message returned by the process.
 
 #### Sample
