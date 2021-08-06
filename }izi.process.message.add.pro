@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"mwKtNW9Jv\4]raoZ[_IXB?[rJXn5<6OmE=fgQ^DOLoy3w2bPMVwL:D[B>p=Gsh7KJAvPT51PMlKDJhHq4oY72WEDuQshLKxiJGD>dW0^VF^a\UAFtxY9::h6U:jFx?w7LM6gs1<clJ=12WV[r8n6MJFBF]xbuP5zZoZ;oin@Rxf9RbnDWB5b?FZ_7VvkDtJh>J;`m<sw"
+565,"wUOfxJoE<zV3b6VpEVzBntea[FC_Op1rN1XmD^zdYd>\E]=:PLwNkaRYfN_zvWDEzMY\oQv16[KeFVGHUoiHOoYxvh_`_>0Etc;9k^xe7[4sj;[cwy]<ic3uP2]iPzN\K3wRGKPbIodvUZreM>Upc@^8^pIH=t:]rH6?B`W3[Bw_?UdfeUBO2kt]P48UC8[:H@JOvt?o"
 559,1
 928,0
 593,
@@ -58,7 +58,7 @@ vMessage
 582,1
 VarType=32ColType=827
 603,0
-572,143
+572,141
 #****Begin: Generated Statements***
 #****End: Generated Statements****
 
@@ -159,12 +159,10 @@ nMillisecond = 86400000 * (nDateTime2 - INT(nDateTime2) - (nHour * (1 / 24)) - (
 
 sProcess = pProcess;
 sUser = cTM1User;
+sUserDisplayValue = '';
 If(CubeExists('}ElementAttributes_}Clients') = 1);
     If(DimIx('}ElementAttributes_}Clients', '}TM1_DefaultDisplayValue') > 0);
-        sDefaultDisplayValue = CellGetS('}ElementAttributes_}Clients', sUser, '}TM1_DefaultDisplayValue');
-        If(Trim(sDefaultDisplayValue) @<> '');
-            sUser = sDefaultDisplayValue;
-        EndIf;
+        sUserDisplayValue = CellGetS('}ElementAttributes_}Clients', sUser, '}TM1_DefaultDisplayValue');
     EndIf;
 EndIf;
 sYear = TimSt(nDateTime, '\Y');
@@ -244,7 +242,7 @@ If(sErrorMsg @= '');
     
     sMeasure = 'User Display Value';
     If(CellIsUpdateable(cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
-        CellPutS(sUser, cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
+        CellPutS(sUserDisplayValue, cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
     EndIf;
     
     sMeasure = 'Message Type';
@@ -271,7 +269,7 @@ If(sErrorMsg @= '');
     
     sMeasure = 'User Display Value';
     If(CellIsUpdateable(cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
-        CellPutS(sUser, cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
+        CellPutS(sUserDisplayValue, cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
     EndIf;
     
     sMeasure = 'Message Type';
