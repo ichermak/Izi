@@ -1,0 +1,17 @@
+Level_L;Alias_L;Level_L-1;Weight_L-1;Alias_L-1;Level_L-2;Weight_L-2;Alias_L-2;Level_L-3;Weight_L-3;Alias_L-3;Level_L-4;Weight_L-4;Alias_L-4;Level_L-5;Weight_L-5;Alias_L-5;Level_L-6;Weight_L-6;Alias_L-6;Level_L-7;Weight_L-7;Alias_L-7;Level_L-8;Weight_L-8;Alias_L-8;Level_L-9;Weight_L-9;Alias_L-9;A:AliasAttributeName;S:StringAttributeName;N:NumericAttributeName;…;<AttributeType>:<AttributeName>
+A;;;;;;;;;;;;;;;;;;;;;;;;;;;;;XA;Blue;123;;
+A;;A1;1;;;;;;;;;;;;;;;;;;;;;;;;;;XA1;Blue;123;;
+A;;A1;1;;A1a;1;;;;;;;;;;;;;;;;;;;;;;;XA1a;Blue;123;;
+A;;A2;1;;;;;;;;;;;;;;;;;;;;;;;;;;XA2;Blue;123;;
+A;;A2;1;;A2a;1;;;;;;;;;;;;;;;;;;;;;;;XA2a;Blue;123;;
+A;;A2;1;;A2b;1;;;;;;;;;;;;;;;;;;;;;;;XA2b;Blue;123;;
+B;;;;;;;;;;;;;;;;;;;;;;;;;;;;;XB;Yellow;123;;
+B;;B1;1;;;;;;;;;;;;;;;;;;;;;;;;;;XB1;Yellow;123;;
+B;;B1;1;;B1a;1;;;;;;;;;;;;;;;;;;;;;;;XB1a;Yellow;123;;
+B;;B2;1;;;;;;;;;;;;;;;;;;;;;;;;;;XB2;Yellow;123;;
+B;;B2;1;;B2a;1;;;;;;;;;;;;;;;;;;;;;;;XB2a;Yellow;123;;
+C;;;;;;;;;;;;;;;;;;;;;;;;;;;;;XC;Green;456;;
+C;;C1;1;;;;;;;;;;;;;;;;;;;;;;;;;;XC1;Green;456;;
+C;;C1;1;;C1a;1;;;;;;;;;;;;;;;;;;;;;;;XC1a;Green;456;;
+C;;C1;1;;C1b;1;;;;;;;;;;;;;;;;;;;;;;;XC1b;Green;456;;
+C;;C1;1;;C1c;1;;;;;;;;;;;;;;;;;;;;;;;XC1c;Green;456;;
