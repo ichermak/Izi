@@ -4,7 +4,7 @@
 586,"C:\Template.csv"
 585,"C:\Template.csv"
 564,
-565,"aaHzWcNwKnjc[890pM6Tx[VE;xTmSJwuD?l?CUhfPt^SxBRAzO:MbmUv:rOlc;r5dhZ:w<73Mke0MBk\UKAvYxMOol4qK]@[ofl]mU;7\L[@rkW<?WRe6OdnW;wIK^\1Db1uxpbX9AjBK[qktpxJxa8z0kZ_ne@xBkXsVW4ckA[y?1r3idqtV0[3QeSehsTFCo;AOZR0"
+565,"liM6CxSvCZ1?aFz@lJVIjim3o]]r07v5[NxVdQBAMjvzjM^<Q^]F\lqJgTPjYPmz:[0<srN7so?ycBTud0xe=;QpZeEm[neiWh]G4S`g4Zy_S8zi]tXkcG`v_Nn=BzNHM:XR3yolI>G722^=w0;nYDHUlOm@vUws_?hRVaFGmgiv8A]yPYi]VB<u=9[mKkMcM@vrGN=r"
 559,1
 928,0
 593,
@@ -73,7 +73,7 @@ pDelimiter,"[Optional] Source delimiter"
 pQuoteCharacter,"[Optional] Quote character"
 pDecimalSeparator,"[Optional] Decimal separator"
 pThousandSeparator,"[Optional] Thousand separator"
-577,39
+577,49
 vLevel_L
 vAlias_L
 vLevel_L_1
@@ -113,7 +113,17 @@ vAttribute_7
 vAttribute_8
 vAttribute_9
 vAttribute_10
-578,39
+vAttribute_11
+vAttribute_12
+vAttribute_13
+vAttribute_14
+vAttribute_15
+vAttribute_16
+vAttribute_17
+vAttribute_18
+vAttribute_19
+vAttribute_20
+578,49
 2
 2
 2
@@ -153,7 +163,17 @@ vAttribute_10
 2
 2
 2
-579,39
+2
+2
+2
+2
+2
+2
+2
+2
+2
+2
+579,49
 1
 2
 3
@@ -193,7 +213,17 @@ vAttribute_10
 37
 38
 39
-580,39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+580,49
 0
 0
 0
@@ -233,7 +263,6 @@ vAttribute_10
 0
 0
 0
-581,39
 0
 0
 0
@@ -244,6 +273,7 @@ vAttribute_10
 0
 0
 0
+581,49
 0
 0
 0
@@ -273,7 +303,37 @@ vAttribute_10
 0
 0
 0
-582,39
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+582,49
+VarType=32ColType=827
+VarType=32ColType=827
+VarType=32ColType=827
+VarType=32ColType=827
+VarType=32ColType=827
+VarType=32ColType=827
+VarType=32ColType=827
+VarType=32ColType=827
+VarType=32ColType=827
+VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
@@ -314,7 +374,7 @@ VarType=32ColType=827
 VarType=32ColType=827
 VarType=32ColType=827
 603,0
-572,196
+572,197
 #****Begin: Generated Statements***
 #****End: Generated Statements****
 
@@ -327,10 +387,11 @@ VarType=32ColType=827
 
 # ====================================================================================================
 # Description : Create hierarchy from a given csv file.
-#               The template used by process allows you to define only 10 levels for a hierarchies, an alias and 10 attributes (could be alias, string or numeric).
+#               The template used by process allows you to define only 10 levels for a hierarchies, an alias and 20 attributes (could be alias, string or numeric).
 #
 # Updates :
-# 	- 2021/08/02 - Ifthen CHERMAK (www.linkedin.com/in/ichermak) : Creation 
+# 	- 2021/08/02 - Ifthen CHERMAK (www.linkedin.com/in/ichermak) : Creation
+# 	- 2021/09/19 - Ifthen CHERMAK (www.linkedin.com/in/ichermak) : The process support now 20 attributes
 # ====================================================================================================
 
 
@@ -560,7 +621,7 @@ If(nMetadataRecord >= 2);
         nCtr = nCtr + 1;
     End;
 EndIf;
-574,200
+574,350
 #****Begin: Generated Statements***
 #****End: Generated Statements****
 
@@ -599,7 +660,37 @@ If(nDataRecord = 1);
     sAttributeType10 = Subst(vAttribute_10, 1, 1);
     sAttributeName10 = Subst(vAttribute_10, Scan(':', vAttribute_10) + 1, Long(vAttribute_10));
     
-    nMax = 10;
+    sAttributeType11 = Subst(vAttribute_11, 1, 1);
+    sAttributeName11 = Subst(vAttribute_11, Scan(':', vAttribute_11) + 1, Long(vAttribute_11));
+    
+    sAttributeType12 = Subst(vAttribute_12, 1, 1);
+    sAttributeName12 = Subst(vAttribute_12, Scan(':', vAttribute_12) + 1, Long(vAttribute_12));
+    
+    sAttributeType13 = Subst(vAttribute_13, 1, 1);
+    sAttributeName13 = Subst(vAttribute_13, Scan(':', vAttribute_13) + 1, Long(vAttribute_13));
+    
+    sAttributeType14 = Subst(vAttribute_14, 1, 1);
+    sAttributeName14 = Subst(vAttribute_14, Scan(':', vAttribute_14) + 1, Long(vAttribute_14));
+    
+    sAttributeType15 = Subst(vAttribute_15, 1, 1);
+    sAttributeName15 = Subst(vAttribute_15, Scan(':', vAttribute_15) + 1, Long(vAttribute_15));
+    
+    sAttributeType16 = Subst(vAttribute_16, 1, 1);
+    sAttributeName16 = Subst(vAttribute_16, Scan(':', vAttribute_16) + 1, Long(vAttribute_16));
+    
+    sAttributeType17 = Subst(vAttribute_17, 1, 1);
+    sAttributeName17 = Subst(vAttribute_17, Scan(':', vAttribute_17) + 1, Long(vAttribute_17));
+    
+    sAttributeType18 = Subst(vAttribute_18, 1, 1);
+    sAttributeName18 = Subst(vAttribute_18, Scan(':', vAttribute_18) + 1, Long(vAttribute_18));
+    
+    sAttributeType19 = Subst(vAttribute_19, 1, 1);
+    sAttributeName19 = Subst(vAttribute_19, Scan(':', vAttribute_19) + 1, Long(vAttribute_19));
+    
+    sAttributeType20 = Subst(vAttribute_20, 1, 1);
+    sAttributeName20 = Subst(vAttribute_20, Scan(':', vAttribute_20) + 1, Long(vAttribute_20));
+    
+    nMax = 20;
     nCtr = 1;
     While(nCtr <= nMax);
         sAttributeType = Expand('%' | 'sAttributeType' | NumberToString(nCtr) | '%');
@@ -751,6 +842,126 @@ If(nDataRecord >= 2);
     sAttributeName = sAttributeName10;
     sAttributeType = sAttributeType10;
     sAttributeValue = vAttribute_10;
+    If(Trim(sAttributeName) @<> '');
+        If((sAttributeType @= 'A') % (sAttributeType @= 'S'));
+            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
+        Else;
+            nAttributeValue = StringToNumberEx(sAttributeValue, pDecimalSeparator, pThousandSeparator);
+            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
+        EndIf;
+    EndIf;
+    
+    sAttributeName = sAttributeName11;
+    sAttributeType = sAttributeType11;
+    sAttributeValue = vAttribute_11;
+    If(Trim(sAttributeName) @<> '');
+        If((sAttributeType @= 'A') % (sAttributeType @= 'S'));
+            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
+        Else;
+            nAttributeValue = StringToNumberEx(sAttributeValue, pDecimalSeparator, pThousandSeparator);
+            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
+        EndIf;
+    EndIf;
+    
+    sAttributeName = sAttributeName12;
+    sAttributeType = sAttributeType12;
+    sAttributeValue = vAttribute_12;
+    If(Trim(sAttributeName) @<> '');
+        If((sAttributeType @= 'A') % (sAttributeType @= 'S'));
+            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
+        Else;
+            nAttributeValue = StringToNumberEx(sAttributeValue, pDecimalSeparator, pThousandSeparator);
+            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
+        EndIf;
+    EndIf;
+    
+    sAttributeName = sAttributeName13;
+    sAttributeType = sAttributeType13;
+    sAttributeValue = vAttribute_13;
+    If(Trim(sAttributeName) @<> '');
+        If((sAttributeType @= 'A') % (sAttributeType @= 'S'));
+            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
+        Else;
+            nAttributeValue = StringToNumberEx(sAttributeValue, pDecimalSeparator, pThousandSeparator);
+            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
+        EndIf;
+    EndIf;
+    
+    sAttributeName = sAttributeName14;
+    sAttributeType = sAttributeType14;
+    sAttributeValue = vAttribute_14;
+    If(Trim(sAttributeName) @<> '');
+        If((sAttributeType @= 'A') % (sAttributeType @= 'S'));
+            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
+        Else;
+            nAttributeValue = StringToNumberEx(sAttributeValue, pDecimalSeparator, pThousandSeparator);
+            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
+        EndIf;
+    EndIf;
+    
+    sAttributeName = sAttributeName15;
+    sAttributeType = sAttributeType15;
+    sAttributeValue = vAttribute_15;
+    If(Trim(sAttributeName) @<> '');
+        If((sAttributeType @= 'A') % (sAttributeType @= 'S'));
+            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
+        Else;
+            nAttributeValue = StringToNumberEx(sAttributeValue, pDecimalSeparator, pThousandSeparator);
+            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
+        EndIf;
+    EndIf;
+    
+    sAttributeName = sAttributeName16;
+    sAttributeType = sAttributeType16;
+    sAttributeValue = vAttribute_16;
+    If(Trim(sAttributeName) @<> '');
+        If((sAttributeType @= 'A') % (sAttributeType @= 'S'));
+            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
+        Else;
+            nAttributeValue = StringToNumberEx(sAttributeValue, pDecimalSeparator, pThousandSeparator);
+            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
+        EndIf;
+    EndIf;
+    
+    sAttributeName = sAttributeName17;
+    sAttributeType = sAttributeType17;
+    sAttributeValue = vAttribute_17;
+    If(Trim(sAttributeName) @<> '');
+        If((sAttributeType @= 'A') % (sAttributeType @= 'S'));
+            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
+        Else;
+            nAttributeValue = StringToNumberEx(sAttributeValue, pDecimalSeparator, pThousandSeparator);
+            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
+        EndIf;
+    EndIf;
+    
+    sAttributeName = sAttributeName18;
+    sAttributeType = sAttributeType18;
+    sAttributeValue = vAttribute_18;
+    If(Trim(sAttributeName) @<> '');
+        If((sAttributeType @= 'A') % (sAttributeType @= 'S'));
+            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
+        Else;
+            nAttributeValue = StringToNumberEx(sAttributeValue, pDecimalSeparator, pThousandSeparator);
+            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
+        EndIf;
+    EndIf;
+    
+    sAttributeName = sAttributeName19;
+    sAttributeType = sAttributeType19;
+    sAttributeValue = vAttribute_19;
+    If(Trim(sAttributeName) @<> '');
+        If((sAttributeType @= 'A') % (sAttributeType @= 'S'));
+            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
+        Else;
+            nAttributeValue = StringToNumberEx(sAttributeValue, pDecimalSeparator, pThousandSeparator);
+            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
+        EndIf;
+    EndIf;
+    
+    sAttributeName = sAttributeName20;
+    sAttributeType = sAttributeType20;
+    sAttributeValue = vAttribute_20;
     If(Trim(sAttributeName) @<> '');
         If((sAttributeType @= 'A') % (sAttributeType @= 'S'));
             ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
