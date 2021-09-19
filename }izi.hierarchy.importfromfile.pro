@@ -4,7 +4,7 @@
 586,"C:\Template.csv"
 585,"C:\Template.csv"
 564,
-565,"v?k>SG0@IjDna\rdqfJvCNaDlE@9rPrxpA1;aGXlPaQQDPXwoq_@Bx5fZaI:?rUGQzD>UdDD[WkhF=^Mv?n\_6r`Sk70PNW4eCPEH\:n@ubeBDeEn3m;7mF<c2WA5RbmkdFD[u1C=e<VfrhrTKSH^k4leZ36sLLg\fPnhh8anX\^T5TF>_bB;BoeMwRMT?B2;ZBSUAT2"
+565,"aaHzWcNwKnjc[890pM6Tx[VE;xTmSJwuD?l?CUhfPt^SxBRAzO:MbmUv:rOlc;r5dhZ:w<73Mke0MBk\UKAvYxMOol4qK]@[ofl]mU;7\L[@rkW<?WRe6OdnW;wIK^\1Db1uxpbX9AjBK[qktpxJxa8z0kZ_ne@xBkXsVW4ckA[y?1r3idqtV0[3QeSehsTFCo;AOZR0"
 559,1
 928,0
 593,
@@ -645,10 +645,10 @@ If(nDataRecord >= 2);
     sAttributeValue = vAttribute_1;
     If(Trim(sAttributeName) @<> '');
         If((sAttributeType @= 'A') % (sAttributeType @= 'S'));
-            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sElement, sAttributeName);
+            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
         Else;
             nAttributeValue = StringToNumberEx(sAttributeValue, pDecimalSeparator, pThousandSeparator);
-            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sElement, sAttributeName);
+            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
         EndIf;
     EndIf;
     
@@ -657,10 +657,10 @@ If(nDataRecord >= 2);
     sAttributeValue = vAttribute_2;
     If(Trim(sAttributeName) @<> '');
         If((sAttributeType @= 'A') % (sAttributeType @= 'S'));
-            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sElement, sAttributeName);
+            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
         Else;
             nAttributeValue = StringToNumberEx(sAttributeValue, pDecimalSeparator, pThousandSeparator);
-            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sElement, sAttributeName);
+            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
         EndIf;
     EndIf;
     
@@ -669,10 +669,10 @@ If(nDataRecord >= 2);
     sAttributeValue = vAttribute_3;
     If(Trim(sAttributeName) @<> '');
         If((sAttributeType @= 'A') % (sAttributeType @= 'S'));
-            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sElement, sAttributeName);
+            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
         Else;
             nAttributeValue = StringToNumberEx(sAttributeValue, pDecimalSeparator, pThousandSeparator);
-            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sElement, sAttributeName);
+            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
         EndIf;
     EndIf;
     
@@ -681,10 +681,10 @@ If(nDataRecord >= 2);
     sAttributeValue = vAttribute_4;
     If(Trim(sAttributeName) @<> '');
         If((sAttributeType @= 'A') % (sAttributeType @= 'S'));
-            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sElement, sAttributeName);
+            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
         Else;
             nAttributeValue = StringToNumberEx(sAttributeValue, pDecimalSeparator, pThousandSeparator);
-            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sElement, sAttributeName);
+            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
         EndIf;
     EndIf;
     
@@ -693,10 +693,10 @@ If(nDataRecord >= 2);
     sAttributeValue = vAttribute_5;
     If(Trim(sAttributeName) @<> '');
         If((sAttributeType @= 'A') % (sAttributeType @= 'S'));
-            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sElement, sAttributeName);
+            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
         Else;
             nAttributeValue = StringToNumberEx(sAttributeValue, pDecimalSeparator, pThousandSeparator);
-            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sElement, sAttributeName);
+            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
         EndIf;
     EndIf;
     
@@ -705,10 +705,10 @@ If(nDataRecord >= 2);
     sAttributeValue = vAttribute_6;
     If(Trim(sAttributeName) @<> '');
         If((sAttributeType @= 'A') % (sAttributeType @= 'S'));
-            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sElement, sAttributeName);
+            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
         Else;
             nAttributeValue = StringToNumberEx(sAttributeValue, pDecimalSeparator, pThousandSeparator);
-            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sElement, sAttributeName);
+            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
         EndIf;
     EndIf;
     
@@ -717,10 +717,10 @@ If(nDataRecord >= 2);
     sAttributeValue = vAttribute_7;
     If(Trim(sAttributeName) @<> '');
         If((sAttributeType @= 'A') % (sAttributeType @= 'S'));
-            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sElement, sAttributeName);
+            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
         Else;
             nAttributeValue = StringToNumberEx(sAttributeValue, pDecimalSeparator, pThousandSeparator);
-            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sElement, sAttributeName);
+            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
         EndIf;
     EndIf;
     
@@ -729,10 +729,10 @@ If(nDataRecord >= 2);
     sAttributeValue = vAttribute_8;
     If(Trim(sAttributeName) @<> '');
         If((sAttributeType @= 'A') % (sAttributeType @= 'S'));
-            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sElement, sAttributeName);
+            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
         Else;
             nAttributeValue = StringToNumberEx(sAttributeValue, pDecimalSeparator, pThousandSeparator);
-            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sElement, sAttributeName);
+            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
         EndIf;
     EndIf;
     
@@ -741,10 +741,10 @@ If(nDataRecord >= 2);
     sAttributeValue = vAttribute_9;
     If(Trim(sAttributeName) @<> '');
         If((sAttributeType @= 'A') % (sAttributeType @= 'S'));
-            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sElement, sAttributeName);
+            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
         Else;
             nAttributeValue = StringToNumberEx(sAttributeValue, pDecimalSeparator, pThousandSeparator);
-            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sElement, sAttributeName);
+            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
         EndIf;
     EndIf;
     
@@ -753,10 +753,10 @@ If(nDataRecord >= 2);
     sAttributeValue = vAttribute_10;
     If(Trim(sAttributeName) @<> '');
         If((sAttributeType @= 'A') % (sAttributeType @= 'S'));
-            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sElement, sAttributeName);
+            ElementAttrPutS(sAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
         Else;
             nAttributeValue = StringToNumberEx(sAttributeValue, pDecimalSeparator, pThousandSeparator);
-            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sElement, sAttributeName);
+            ElementAttrPutN(nAttributeValue, pDimension, pHierarchy, sLastElement, sAttributeName);
         EndIf;
     EndIf;
     
