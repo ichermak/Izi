@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"wUOfxJoE<zV3b6VpEVzBntea[FC_Op1rN1XmD^zdYd>\E]=:PLwNkaRYfN_zvWDEzMY\oQv16[KeFVGHUoiHOoYxvh_`_>0Etc;9k^xe7[4sj;[cwy]<ic3uP2]iPzN\K3wRGKPbIodvUZreM>Upc@^8^pIH=t:]rH6?B`W3[Bw_?UdfeUBO2kt]P48UC8[:H@JOvt?o"
+565,"elIraa^3uNYbP]DeRzb1?XHZLHHl8Z[ukerjn:TR0CpF<QnCZgyKmJbg3ZnHqVcWzA]amU??cNklP8<=Ur5`ZLBik14OjrWcan2G>BinfKt8qsX^d9I[U^v>OHK8la_L=dUBiWH=[M5SVmZK4o2D_0dxeZ9h8[jpWSK5[ureyXsg7=vb=:WbxepV^SIeJo_\Qxlm02Nj"
 559,1
 928,0
 593,
@@ -25,26 +25,30 @@
 569,0
 592,0
 599,1000
-560,4
+560,5
 pDebugMode
 pProcess
 pMessage
 pMessageType
-561,4
+pMaxErrorMessage
+561,5
 1
 2
 2
 2
-590,4
+1
+590,5
 pDebugMode,0
 pProcess,""
 pMessage,""
 pMessageType,"Info"
-637,4
+pMaxErrorMessage,100
+637,5
 pDebugMode,"[Optional] 0 = Nothing | 1 = Write to }izi.ProcessMessage cube | 2 = 1 + Keep temporary objects"
 pProcess,"[Mandatory] Process name"
 pMessage,"[Mandatory] Could be a text or a path to a text file"
 pMessageType,"[Optional] Type of message (Example: 'Error')"
+pMaxErrorMessage,"[Optional] Maximum error to be retrieved from TM1ProcessError_*.log"
 577,1
 vMessage
 578,1
@@ -58,7 +62,7 @@ vMessage
 582,1
 VarType=32ColType=827
 603,0
-572,141
+572,131
 #****Begin: Generated Statements***
 #****End: Generated Statements****
 
@@ -74,6 +78,7 @@ VarType=32ColType=827
 #
 # Updates :
 # 	- 2020/05/26 - Ifthen CHERMAK (www.linkedin.com/in/ichermak) : Creation
+# 	- 2021/11/03 - Ifthen CHERMAK (www.linkedin.com/in/ichermak) : Avoid using DimensionTimeLastUpdated to get milliseconds due to contention issues
 # ====================================================================================================
 
 
@@ -111,7 +116,7 @@ cTotalDate = 'Total Date';
 cTotalTime = 'Total Time';
 cTotalMillisecond = 'Total Millisecond';
 
-cMaxErrorMessage = 100;
+nMaxMillisecond = 999;
 
 
 # === PARAMETERS VERIFICATION AND OTHER CHECKS
@@ -142,22 +147,6 @@ EndIf;
 # ****************************************
 nDateTime = Now;
 
-# Create a temporary dimension to use DimensionTimeLastUpdated as this is the only way to get milliseconds for the current version of Planning Analytics
-If(DimensionExists(cTempDimName) = 1);
-    DimensionDestroy(cTempDimName);
-EndIf;
-DimensionCreate(cTempDimName);
-
-# It is necessary to subtract 21916 which correspond to the serial date of 01/01/1960 when the counting starts from 01/01/1900 because the date and time functions are based on the serial date from 01/01/1960
-nDateTime2 = DimensionTimeLastUpdated(cTempDimName) - 21916;
-DimensionDestroy(cTempDimName);
-
-nHour = TIMVL(nDateTime2, 'H');
-nMinute = TIMVL(nDateTime2, 'I');
-nSecond = TIMVL(nDateTime2, 'S');
-nMillisecond = 86400000 * (nDateTime2 - INT(nDateTime2) - (nHour * (1 / 24)) - (nMinute * (1 / 1440)) - (nSecond * (1 / 86400)));
-
-sProcess = pProcess;
 sUser = cTM1User;
 sUserDisplayValue = '';
 If(CubeExists('}ElementAttributes_}Clients') = 1);
@@ -165,10 +154,15 @@ If(CubeExists('}ElementAttributes_}Clients') = 1);
         sUserDisplayValue = CellGetS('}ElementAttributes_}Clients', sUser, '}TM1_DefaultDisplayValue');
     EndIf;
 EndIf;
+
 sYear = TimSt(nDateTime, '\Y');
 sDate = TimSt(nDateTime, '\m-\d');
 sTime = TimSt(nDateTime, '\h:\i:\s');
-sMillisecond = Fill('0', 3 - Long(NumberToString(INT(nMillisecond)))) | NumberToString(INT(nMillisecond));
+
+nMillisecond = CellGetN(cCube, pProcess, sUser, sYear, sDate, sTime, cTotalMillisecond, 'Message Count');
+nMillisecond = IF(nMillisecond <= nMaxMillisecond, nMillisecond, nMaxMillisecond);
+sMillisecond = Fill('0', Long(NumberToString(nMaxMillisecond)) - Long(NumberToString(nMillisecond))) | NumberToString(nMillisecond);
+
 sTimeStamp = TimSt(nDateTime, '\Y-\m-\d \h:\i:\s') | '.' | sMillisecond;
 sMessageType = Trim(pMessageType);
 If(sMessageType @= '');
@@ -209,15 +203,15 @@ EndIf;
 
 nDataRecordCount = nDataRecordCount + 1;
 
-If(nDataRecordCount <= cMaxErrorMessage);
+If(nDataRecordCount <= pMaxErrorMessage);
     sMessage = sMessage | IF(sMessage @= '', '', cCrLf) | vMessage;
-ElseIf(nDataRecordCount = cMaxErrorMessage + 1);
+ElseIf(nDataRecordCount = pMaxErrorMessage + 1);
     sNewMsg = Expand('...%cCrLf%The rest of error messages are available within %pMessage%.');
     sMessage = sMessage | IF(sMessage @= '', '', cCrLf) | sNewMsg;
 Else;
     ProcessBreak;
 EndIf;
-575,150
+575,160
 #****Begin: Generated Statements***
 #****End: Generated Statements****
 
@@ -225,61 +219,66 @@ If(sErrorMsg @= '');
     
     # === OPERATIONS
     # ==================================================================================================== 
-    sOldMsg = CellGetS(cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, 'Message');
+    sOldMsg = CellGetS(cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, 'Message');
     sNewMsg = sOldMsg | IF(sOldMsg @= '', '', cCrLf) | sMessage;
     
     # *** Message logging
     # ****************************************
     sMeasure = 'Timestamp';
-    If(CellIsUpdateable(cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
-        CellPutS(sTimestamp, cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
+    If(CellIsUpdateable(cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
+        CellPutS(sTimestamp, cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
     EndIf;
     
     sMeasure = 'User';
-    If(CellIsUpdateable(cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
-        CellPutS(sUser, cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
+    If(CellIsUpdateable(cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
+        CellPutS(sUser, cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
     EndIf;
     
     sMeasure = 'User Display Value';
-    If(CellIsUpdateable(cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
-        CellPutS(sUserDisplayValue, cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
+    If(CellIsUpdateable(cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
+        CellPutS(sUserDisplayValue, cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
+    EndIf;
+    
+    sMeasure = 'Message Count';
+    If(CellIsUpdateable(cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
+        CellPutN(1, cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
     EndIf;
     
     sMeasure = 'Message Type';
-    If(CellIsUpdateable(cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
-        CellPutS(sMessageType, cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
+    If(CellIsUpdateable(cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
+        CellPutS(sMessageType, cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
     EndIf;
     
     sMeasure = 'Message';
-    If(CellIsUpdateable(cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
-        CellPutS(sNewMsg, cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
+    If(CellIsUpdateable(cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
+        CellPutS(sNewMsg, cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
     EndIf;
 
     # *** Latest message logging
     # ****************************************
     sMeasure = 'Timestamp';
-    If(CellIsUpdateable(cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
-        CellPutS(sTimestamp, cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
+    If(CellIsUpdateable(cCube, pProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
+        CellPutS(sTimestamp, cCube, pProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
     EndIf;
     
     sMeasure = 'User';
-    If(CellIsUpdateable(cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
-        CellPutS(sUser, cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
+    If(CellIsUpdateable(cCube, pProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
+        CellPutS(sUser, cCube, pProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
     EndIf;
     
     sMeasure = 'User Display Value';
-    If(CellIsUpdateable(cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
-        CellPutS(sUserDisplayValue, cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
+    If(CellIsUpdateable(cCube, pProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
+        CellPutS(sUserDisplayValue, cCube, pProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
     EndIf;
     
     sMeasure = 'Message Type';
-    If(CellIsUpdateable(cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
-        CellPutS(sMessageType, cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
+    If(CellIsUpdateable(cCube, pProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
+        CellPutS(sMessageType, cCube, pProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
     EndIf;
     
     sMeasure = 'Message';
-    If(CellIsUpdateable(cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
-        CellPutS(sMessage, cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
+    If(CellIsUpdateable(cCube, pProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
+        CellPutS(sMessage, cCube, pProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
     EndIf;
     
     
@@ -296,7 +295,7 @@ Else;
     If((pDebugMode = 1) % (pDebugMode = 2));
         nDateTime = Now;
         
-        sProcess = cProcessName;
+        pProcess = cProcessName;
         sUser = cTM1User;
         sYear = TimSt(nDateTime, '\Y');
         sDate = TimSt(nDateTime, '\m-\d');
@@ -308,61 +307,66 @@ Else;
         sMessageType = 'Error';
         sMessage = sErrorMsg;
         
-        sOldMsg = CellGetS(cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, 'Message');
+        sOldMsg = CellGetS(cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, 'Message');
         sNewMsg = sOldMsg | IF(sOldMsg @= '', '', cCrLf) | sErrorMsg;
     
         # *** Message logging
         # ****************************************
         sMeasure = 'Timestamp';
-        If(CellIsUpdateable(cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
-            CellPutS(sTimestamp, cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
+        If(CellIsUpdateable(cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
+            CellPutS(sTimestamp, cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
         EndIf;
         
         sMeasure = 'User';
-        If(CellIsUpdateable(cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
-            CellPutS(sUser, cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
+        If(CellIsUpdateable(cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
+            CellPutS(sUser, cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
         EndIf;
         
         sMeasure = 'User Display Value';
-        If(CellIsUpdateable(cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
-            CellPutS(sUser, cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
+        If(CellIsUpdateable(cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
+            CellPutS(sUser, cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
+        EndIf;
+        
+        sMeasure = 'Message Count';
+        If(CellIsUpdateable(cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
+            CellPutN(1, cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
         EndIf;
         
         sMeasure = 'Message Type';
-        If(CellIsUpdateable(cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
-            CellPutS(sMessageType, cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
+        If(CellIsUpdateable(cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
+            CellPutS(sMessageType, cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
         EndIf;
         
         sMeasure = 'Message';
-        If(CellIsUpdateable(cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
-            CellPutS(sNewMsg, cCube, sProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
+        If(CellIsUpdateable(cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure) = 1);
+            CellPutS(sNewMsg, cCube, pProcess, sUser, sYear, sDate, sTime, sMillisecond, sMeasure);
         EndIf;
     
         # *** Latest message logging
         # ****************************************
         sMeasure = 'Timestamp';
-        If(CellIsUpdateable(cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
-            CellPutS(sTimestamp, cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
+        If(CellIsUpdateable(cCube, pProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
+            CellPutS(sTimestamp, cCube, pProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
         EndIf;
         
         sMeasure = 'User';
-        If(CellIsUpdateable(cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
-            CellPutS(sUser, cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
+        If(CellIsUpdateable(cCube, pProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
+            CellPutS(sUser, cCube, pProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
         EndIf;
         
         sMeasure = 'User Display Value';
-        If(CellIsUpdateable(cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
-            CellPutS(sUser, cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
+        If(CellIsUpdateable(cCube, pProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
+            CellPutS(sUser, cCube, pProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
         EndIf;
         
         sMeasure = 'Message Type';
-        If(CellIsUpdateable(cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
-            CellPutS(sMessageType, cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
+        If(CellIsUpdateable(cCube, pProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
+            CellPutS(sMessageType, cCube, pProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
         EndIf;
         
         sMeasure = 'Message';
-        If(CellIsUpdateable(cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
-            CellPutS(sMessage, cCube, sProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
+        If(CellIsUpdateable(cCube, pProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure) = 1);
+            CellPutS(sMessage, cCube, pProcess, sUser, cTotalYear, cTotalDate, cTotalTime, cTotalMillisecond, sMeasure);
         EndIf;
         
     EndIf;
