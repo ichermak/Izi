@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"h=v<hFtWa_]kJOBZUNUh9>c=rhYgXWcL:oRs?sr@O;g>MfzL4i>9Ul>qnUoZAST5qrmhx1n3e`@c:zjYLiV^WAJsj6sApjh6QdIRSYEl@6i=KvNVd6UbcDG:]eJ1=Y0zCMyrr6Gl?ZCI0g6Uu]b_AGgUZ1@1:s^JpWTy7Bu5hYd_d@wcIFc_V]ju]?Jwpb?rDxEzYUQp"
+565,"o`>EbIhHJ3rg@v:aTC>yiGrxRDNRtmC_[=FD<<9s7SjTRYUX9NvCF\Oip`_ttjw43k3a<81R>bE1olWgwN2HUg6mA_k2W^S;nhM_f9ef5or[EN3No2mWuBBOiu^:?7\T9rHwSNp]hjsfNo^RUm5FF45CRY\Cub^ll?==yThmDFTMxMA`6@Pffhz9JxpN@]O7sh@2Z2uY"
 559,1
 928,0
 593,
@@ -50,8 +50,8 @@ pMinuteEnd
 590,10
 pDebugMode,0
 pSetUseActiveSandbox,0
-pDayOfTheMonthStart,-1
-pDayOfTheMonthEnd,0
+pDayOfTheMonthStart,0
+pDayOfTheMonthEnd,30
 pDayOfTheWeekStart,1
 pDayOfTheWeekEnd,7
 pHourStart,0
@@ -62,7 +62,7 @@ pMinuteEnd,59
 pDebugMode,"[Optional] 0 = Nothing | 1 = Write to server message log | 2 = 1 + Keep temporary objects"
 pSetUseActiveSandbox,"[Optional] 0 = Reads and writes to the base data | 1 = Reads and writes to the user's active sandbox"
 pDayOfTheMonthStart,"[Optional] Day of the month expressed in D+N for the lower bound of the execution time window. For the 2nd day of the month, the value must be set to 1. Negative values are allowed (Example : -1)"
-pDayOfTheMonthEnd,"[Optional] Day of the month expressed in D+N for the upper bound of the execution time window. Must be greater than or equal to pDayOfTheMonthStart. For the 7th day of the month, the value must be set to 6. Negative values are allowed (Example : 0)"
+pDayOfTheMonthEnd,"[Optional] Day of the month expressed in D+N for the upper bound of the execution time window. For the 7th day of the month, the value must be set to 6. Negative values are allowed (Example : 0)"
 pDayOfTheWeekStart,"[Optional] Day of the week for the lower bound of the execution time window. The first day of the week is Monday (Example : 1)"
 pDayOfTheWeekEnd,"[Optional] Day of the week for the lower bound of the execution time window. Must be greater than or equal to pDayOfTheWeekStart. The first day of the week is Monday (Example : 7)"
 pHourStart,"[Optional] Hour for the lower bound of the execution time window (Example : 0)"
@@ -76,7 +76,7 @@ pMinuteEnd,"[Optional] Minute for the upper bound of the execution time window. 
 581,0
 582,0
 603,0
-572,165
+572,235
 
 #****Begin: Generated Statements***
 #****End: Generated Statements****
@@ -147,8 +147,18 @@ pHourEnd = Int(pHourEnd);
 pMinuteStart = Int(pMinuteStart);
 pMinuteEnd = Int(pMinuteEnd);
 
-If(pDayOfTheMonthStart > pDayOfTheMonthEnd);
-	sNewMsg = Expand('Invalid parameters : pDayOfTheMonthStart=%pDayOfTheMonthStart% and pDayOfTheMonthEnd=%pDayOfTheMonthEnd%. pDayOfTheMonthStart must be less than or equal to pDayOfTheMonthEnd.'); 
+If((pDayOfTheMonthStart > 30) % (pDayOfTheMonthStart < (-1) * 31));
+	sNewMsg = Expand('Invalid parameter : pDayOfTheMonthStart=%pDayOfTheMonthStart%.');
+    sErrorMsg = sErrorMsg | IF(sErrorMsg @= '', '', cCrLf) | sNewMsg;
+EndIf;
+
+If((pDayOfTheMonthEnd > 30) % (pDayOfTheMonthEnd < (-1) * 31));
+	sNewMsg = Expand('Invalid parameter : pDayOfTheMonthEnd=%pDayOfTheMonthEnd%.');
+    sErrorMsg = sErrorMsg | IF(sErrorMsg @= '', '', cCrLf) | sNewMsg;
+EndIf;
+
+If((pDayOfTheMonthStart * pDayOfTheMonthEnd > 0) & (pDayOfTheMonthStart > pDayOfTheMonthEnd));
+	sNewMsg = Expand('Invalid parameters : pDayOfTheMonthStart=%pDayOfTheMonthStart% and pDayOfTheMonthEnd=%pDayOfTheMonthEnd% .');
     sErrorMsg = sErrorMsg | IF(sErrorMsg @= '', '', cCrLf) | sNewMsg;
 EndIf;
 
@@ -162,7 +172,7 @@ If((pDayOfTheWeekEnd < 1) % (pDayOfTheWeekEnd > 7));
     sErrorMsg = sErrorMsg | IF(sErrorMsg @= '', '', cCrLf) | sNewMsg;
 EndIf;
 
-If(pDayOfTheMonthStart > pDayOfTheMonthEnd);
+If(pDayOfTheWeekStart > pDayOfTheWeekEnd);
 	sNewMsg = Expand('Invalid parameters : pDayOfTheWeekStart=%pDayOfTheWeekStart% and pDayOfTheWeekEnd=%pDayOfTheWeekEnd%. pDayOfTheWeekStart must be less than or equal to pDayOfTheWeekEnd.'); 
     sErrorMsg = sErrorMsg | IF(sErrorMsg @= '', '', cCrLf) | sNewMsg;
 EndIf;
@@ -212,18 +222,78 @@ EndIf;
 
 # === OPERATIONS
 # ==================================================================================================== 
-nFirstDayOfTheMonth = DayNo(TimSt(cStartTime, '\Y-\m') | '-01');
-nDayOfTheMonthStart = nFirstDayOfTheMonth + pDayOfTheMonthStart;
-nDayOfTheMonthEnd = nFirstDayOfTheMonth + pDayOfTheMonthEnd;
-
 nDayOfTheMonth = DayNo(TimSt(cStartTime, '\Y-\m-\d'));
 nDayOfTheWeek = Mod(DayNo(TimSt(cStartTime, '\Y-\m-\d')) + 5, 7);
 nHour = StringToNumber(TimSt(cStartTime, '\h'));
 nMinute = StringToNumber(TimSt(cStartTime, '\i'));
 
 nQuit = 0;
-If((nDayOfTheMonth < nDayOfTheMonthStart) % (nDayOfTheMonth > nDayOfTheMonthEnd));
-    nQuit = 1;
+
+If((pDayOfTheMonthStart < 0) & (pDayOfTheMonthEnd >= 0));
+    nCond1 = 0;
+    nCond2 = 0;
+    
+    sMonth = TimSt(cStartTime, '\m');
+    sYear = TimSt(cStartTime, '\Y');
+    sFirstDayOfTheMonth = sYear | '-' | sMonth | '-' | '01';
+    nFirstDayOfTheMonth = DayNo(sFirstDayOfTheMonth);
+    nDayOfTheMonthStart = nFirstDayOfTheMonth + pDayOfTheMonthStart;
+    nDayOfTheMonthEnd = nFirstDayOfTheMonth + pDayOfTheMonthEnd;
+    If((nDayOfTheMonth < nDayOfTheMonthStart) % (nDayOfTheMonth > nDayOfTheMonthEnd));
+        nCond1 = 1;
+    EndIf;
+    
+    sMonth = IF(TimSt(cStartTime, '\m') @= '12', '01', Fill('0', 2 - Long(NumberToString(StringToNumber(TimSt(cStartTime, '\m')) + 1))) | NumberToString(StringToNumber(TimSt(cStartTime, '\m')) + 1));
+    sYear = IF(TimSt(cStartTime, '\m') @= '12', Fill('0', 4 - Long(NumberToString(StringToNumber(TimSt(cStartTime, '\Y')) + 1))) | NumberToString(StringToNumber(TimSt(cStartTime, '\Y')) + 1), TimSt(cStartTime, '\Y'));
+    sFirstDayOfTheMonth = sYear | '-' | sMonth | '-' | '01';
+    nFirstDayOfTheMonth = DayNo(sFirstDayOfTheMonth);
+    nDayOfTheMonthStart = nFirstDayOfTheMonth + pDayOfTheMonthStart;
+    nDayOfTheMonthEnd = nFirstDayOfTheMonth + pDayOfTheMonthEnd;
+    If((nDayOfTheMonth < nDayOfTheMonthStart) % (nDayOfTheMonth > nDayOfTheMonthEnd));
+        nCond2 = 1;
+    EndIf;
+    
+    If((nCond1 = 1) & (nCond2 = 1));
+        nQuit = 1;
+    EndIf;
+    
+ElseIf((pDayOfTheMonthStart >= 0) & (pDayOfTheMonthEnd < 0));
+    sMonth = TimSt(cStartTime, '\m');
+    sYear = TimSt(cStartTime, '\Y');
+    sFirstDayOfTheMonth = sYear | '-' | sMonth | '-' | '01';
+    nFirstDayOfTheMonth = DayNo(sFirstDayOfTheMonth);
+    nDayOfTheMonthStart = nFirstDayOfTheMonth + pDayOfTheMonthStart;
+    sMonth = IF(TimSt(cStartTime, '\m') @= '12', '01', Fill('0', 2 - Long(NumberToString(StringToNumber(TimSt(cStartTime, '\m')) + 1))) | NumberToString(StringToNumber(TimSt(cStartTime, '\m')) + 1));
+    sYear = IF(TimSt(cStartTime, '\m') @= '12', Fill('0', 4 - Long(NumberToString(StringToNumber(TimSt(cStartTime, '\Y')) + 1))) | NumberToString(StringToNumber(TimSt(cStartTime, '\Y')) + 1), TimSt(cStartTime, '\Y'));
+    sFirstDayOfTheMonth = sYear | '-' | sMonth | '-' | '01';
+    nFirstDayOfTheMonth = DayNo(sFirstDayOfTheMonth);
+    nDayOfTheMonthEnd = nFirstDayOfTheMonth + pDayOfTheMonthEnd;
+    If((nDayOfTheMonth < nDayOfTheMonthStart) % (nDayOfTheMonth > nDayOfTheMonthEnd));
+        nQuit = 1;
+    EndIf;
+
+ElseIf((pDayOfTheMonthStart >= 0) & (pDayOfTheMonthEnd >= 0));
+    sMonth = TimSt(cStartTime, '\m');
+    sYear = TimSt(cStartTime, '\Y');
+    sFirstDayOfTheMonth = sYear | '-' | sMonth | '-' | '01';
+    nFirstDayOfTheMonth = DayNo(sFirstDayOfTheMonth);
+    nDayOfTheMonthStart = nFirstDayOfTheMonth + pDayOfTheMonthStart;
+    nDayOfTheMonthEnd = nFirstDayOfTheMonth + pDayOfTheMonthEnd;
+    If((nDayOfTheMonth < nDayOfTheMonthStart) % (nDayOfTheMonth > nDayOfTheMonthEnd));
+        nQuit = 1;
+    EndIf;
+    
+ElseIf((pDayOfTheMonthStart < 0) & (pDayOfTheMonthEnd < 0));
+    sMonth = IF(TimSt(cStartTime, '\m') @= '12', '01', Fill('0', 2 - Long(NumberToString(StringToNumber(TimSt(cStartTime, '\m')) + 1))) | NumberToString(StringToNumber(TimSt(cStartTime, '\m')) + 1));
+    sYear = IF(TimSt(cStartTime, '\m') @= '12', Fill('0', 4 - Long(NumberToString(StringToNumber(TimSt(cStartTime, '\Y')) + 1))) | NumberToString(StringToNumber(TimSt(cStartTime, '\Y')) + 1), TimSt(cStartTime, '\Y'));
+    sFirstDayOfTheMonth = sYear | '-' | sMonth | '-' | '01';
+    nFirstDayOfTheMonth = DayNo(sFirstDayOfTheMonth);
+    nDayOfTheMonthStart = nFirstDayOfTheMonth + pDayOfTheMonthStart;
+    nDayOfTheMonthEnd = nFirstDayOfTheMonth + pDayOfTheMonthEnd;
+    If((nDayOfTheMonth < nDayOfTheMonthStart) % (nDayOfTheMonth > nDayOfTheMonthEnd));
+        nQuit = 1;
+    EndIf;
+    
 EndIf;
 
 If((nDayOfTheWeek < pDayOfTheWeekStart) % (nDayOfTheWeek > pDayOfTheWeekEnd));
