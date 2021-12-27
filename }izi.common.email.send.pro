@@ -4,7 +4,7 @@
 586,
 585,
 564,
-565,"qXzqy?R\<9P1L?AA?anCjO;b\M61Jd]X]b;=p9h17]NpFSUsgxN3TWPE<jtar;p4J<tMxRDSS:HIwRY2iP2nQ\M<d4C55jILLv4rF[a;DBklO]B[Vx5\7AdB^S9NnQ?Kj^LPuHRT5jbXt<m9`r@3dpITjnXnH?79ff9enLPy@SSFZid]^zTe=f3^SzmnK44j:zGXxFE>"
+565,"swBWxWs9?fvjQ^TEOlLa1US?LDIrS=2SqAHGz7d5eJJX8L`M@SKK^L1IgfqYe`0eEabMtFv3EUNm:bGmARI^\qwOMo5\kOi\wdl;`>468mitEUE[iyZa4wmoj]15vXh;ztH^bSDYClz;8TfO8;nL6z9vpqxsTKJ^zGIDeoUcOY6I1xgj>WJ1S?GqHTQfk`CpL;G@6W[3"
 559,1
 928,0
 593,
@@ -95,7 +95,7 @@ pPriority,"[Optional] 0 = Low | 1 = Normal | 2 = High"
 pBody,"[Optional] Email body"
 pBodyAsHtml,"[Optional] 0 = Body as Text | 1 = Body as HTML"
 pEncoding,"[Optional] 0 = ascii | 1 = bigendianunicode | 2 = bigendianutf32 | 3 = oem | 4 = unicode | 5 = utf7 | 6 = utf8 | 7 = utf8BOM | 8 = utf8NoBOM | 9 = utf32"
-pAttachments,"[Optional] Path of a file to be attached to the email"
+pAttachments,"[Optional] Path of files to be attached to the email separated by comma (Example : 'C:\file1.csv , C:\file2.csv')"
 pWaitForExecution,"[Optional] 0 = Asynchronous execution | 1 = Synchronous execution"
 577,0
 578,0
@@ -104,7 +104,7 @@ pWaitForExecution,"[Optional] 0 = Asynchronous execution | 1 = Synchronous execu
 581,0
 582,0
 603,0
-572,281
+572,282
 #****Begin: Generated Statements***
 #****End: Generated Statements****
 
@@ -120,6 +120,7 @@ pWaitForExecution,"[Optional] 0 = Asynchronous execution | 1 = Synchronous execu
 #
 # Updates :
 # 	- 2021/05/14 - Ifthen CHERMAK (www.linkedin.com/in/ichermak) : Creation
+# 	- 2021/12/27 - Ifthen CHERMAK (www.linkedin.com/in/ichermak) : Add support of multiple file attachments
 # ====================================================================================================
 
 
@@ -157,22 +158,23 @@ cPowershellFile = cProcessName | '.ps1';
 cPowershellContent = '
 <#' | cCrLf | '
     .SYNOPSIS' | cCrLf | '
-        Linked to ' | cProcessName | cCrLf | '
+        Linked to }izi.common.email.send' | cCrLf | '
     .DESCRIPTION' | cCrLf | '
-        Linked to ' | cProcessName | cCrLf | '
+        Linked to }izi.common.email.send' | cCrLf | '
     .NOTES' | cCrLf | '
         Updates :' | cCrLf | '
             - 2021/05/14 - Ifthen CHERMAK (www.linkedin.com/in/ichermak) : Creation' | cCrLf | '
+            - 2021/12/27 - Ifthen CHERMAK (www.linkedin.com/in/ichermak) : Add support of multiple file attachments' | cCrLf | '
 ' | '#>' | cCrLf | '
 ' | cCrLf | '
 PARAM (' | cCrLf | '
-    [Parameter(Mandatory=$false)][String]$SmtpServer,' | cCrLf | '
-    [Parameter(Mandatory=$false)][String]$Port,' | cCrLf | '
+    [Parameter(Mandatory=$true)][String]$SmtpServer,' | cCrLf | '
+    [Parameter(Mandatory=$true)][String]$Port,' | cCrLf | '
     [Parameter(Mandatory=$false)][String]$UseSsl,' | cCrLf | '
     [Parameter(Mandatory=$false)][String]$User,' | cCrLf | '
     [Parameter(Mandatory=$false)][String]$Password,' | cCrLf | '
-    [Parameter(Mandatory=$false)][String]$From,' | cCrLf | '
-    [Parameter(Mandatory=$false)][String]$To,' | cCrLf | '
+    [Parameter(Mandatory=$true)][String]$From,' | cCrLf | '
+    [Parameter(Mandatory=$true)][String]$To,' | cCrLf | '
     [Parameter(Mandatory=$false)][String]$Cc,' | cCrLf | '
     [Parameter(Mandatory=$false)][String]$Subject,' | cCrLf | '
     [Parameter(Mandatory=$false)][String]$Priority,' | cCrLf | '
@@ -184,8 +186,11 @@ PARAM (' | cCrLf | '
 ' | cCrLf | '
 Start-Transcript -Path "$PSCommandPath.log"' | cCrLf | '
 ' | cCrLf | '
+[String[]]$ArrayTo = $To.Split('','')' | cCrLf | '
+[String[]]$ArrayCc = $Cc.Split('','')' | cCrLf | '
+[String[]]$ArrayAttachments = $Attachments.Split('','')' | cCrLf | '
 $BooleanUseSsl = $UseSsl | % {if($_ -eq "True") {$true} else {$false}}' | cCrLf | '
-If($Password){' | cCrLf | '
+If ($Password) {' | cCrLf | '
     $SecureStringPassword = ConvertTo-SecureString $Password -AsPlainText -Force' | cCrLf | '
     $Credential = New-Object System.Management.Automation.PSCredential ($User, $SecureStringPassword)' | cCrLf | '
 }' | cCrLf | '
@@ -195,25 +200,25 @@ $Params = @{}' | cCrLf | '
 $Params.Add(''SmtpServer'', $SmtpServer)' | cCrLf | '
 $Params.Add(''Port'', $Port)' | cCrLf | '
 $Params.Add(''UseSsl'', $BooleanUseSsl)' | cCrLf | '
-If($Password){' | cCrLf | '
+If ($Password) {' | cCrLf | '
     $Params.Add(''Credential'', $Credential)' | cCrLf | '
 }' | cCrLf | '
 $Params.Add(''From'', $From)' | cCrLf | '
-$Params.Add(''To'', $To)' | cCrLf | '
-If($Cc){' | cCrLf | '
-    $Params.Add(''Cc'', $Cc)' | cCrLf | '
+$Params.Add(''To'', $ArrayTo)' | cCrLf | '
+If ($Cc) {' | cCrLf | '
+    $Params.Add(''Cc'', $ArrayCc)' | cCrLf | '
 }' | cCrLf | '
-If($Subject){' | cCrLf | '
+If ($Subject) {' | cCrLf | '
     $Params.Add(''Subject'', $Subject)' | cCrLf | '
 }' | cCrLf | '
 $Params.Add(''Priority'', $Priority)' | cCrLf | '
-If($Body){' | cCrLf | '
+If ($Body) {' | cCrLf | '
     $Params.Add(''Body'', $Body)' | cCrLf | '
 }' | cCrLf | '
 $Params.Add(''BodyAsHtml'', $BooleanBodyAsHtml)' | cCrLf | '
 $Params.Add(''Encoding'', $Encoding)' | cCrLf | '
-If($Attachments){' | cCrLf | '
-    $Params.Add(''Attachments'', $Attachments)' | cCrLf | '
+If ($Attachments) {' | cCrLf | '
+    $Params.Add(''Attachments'', $ArrayAttachments)' | cCrLf | '
 }' | cCrLf | '
 ' | cCrLf | '
 Send-MailMessage @Params' | cCrLf | '
@@ -290,11 +295,6 @@ EndIf;
 
 If((pEncoding < 0) % (pEncoding > 9));
     sNewMsg = Expand('Invalid parameter : pEncoding=%pEncoding%.');
-    sErrorMsg = sErrorMsg | IF(sErrorMsg @= '', '', cCrLf) | sNewMsg;
-EndIf;
-
-If((pAttachments @<> '') & (FileExists(pAttachments) = 0));
-    sNewMsg = Expand('Invalid parameter : pAttachments=%pAttachments%.');
     sErrorMsg = sErrorMsg | IF(sErrorMsg @= '', '', cCrLf) | sNewMsg;
 EndIf;
 
@@ -384,8 +384,9 @@ EndIf;
 DatasourceASCIIQuoteCharacter = '';
 ASCIIOutput(sPowershellFilePath, cPowershellContent);
 
-sCmd = Expand('Powershell -ExecutionPolicy Bypass -File "%sPowershellFilePath%" -SmtpServer "%pSmtpServer%" -Port "%sPort%" -UseSsl "%sUseSsl%" -User "%pUser%" -Password "%pPassword%" -From "%pFrom%" -To "%pTo%" -Cc "%pCc%" -Subject "%pSubject%" -Priority "%sPriority%" -Body "%pBody%" -BodyAsHtml "%sBodyAsHtml%" -Encoding "%sEncoding%" -Attachments "%pAttachments%"');
+sCmd = Expand('Powershell -NoProfile -NoLogo -NonInteractive -ExecutionPolicy Bypass -File "%sPowershellFilePath%" -SmtpServer "%pSmtpServer%" -Port "%sPort%" -UseSsl "%sUseSsl%" -User "%pUser%" -Password "%pPassword%" -From "%pFrom%" -To "%pTo%" -Cc "%pCc%" -Subject "%pSubject%" -Priority "%sPriority%" -Body "%pBody%" -BodyAsHtml "%sBodyAsHtml%" -Encoding "%sEncoding%" -Attachments "%pAttachments%"');
 ExecuteCommand(sCmd, pWaitForExecution);
+
 573,2
 #****Begin: Generated Statements***
 #****End: Generated Statements****
