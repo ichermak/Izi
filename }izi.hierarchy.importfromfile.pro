@@ -392,6 +392,7 @@ VarType=32ColType=827
 # Updates :
 # 	- 2021/08/02 - Ifthen CHERMAK (www.linkedin.com/in/ichermak) : Creation
 # 	- 2021/09/19 - Ifthen CHERMAK (www.linkedin.com/in/ichermak) : The process support now 20 attributes
+# 	- 2021/12/30 - Ifthen CHERMAK (www.linkedin.com/in/ichermak) : Manage the order of the attribute insertion
 # ====================================================================================================
 
 
@@ -690,6 +691,7 @@ If(nDataRecord = 1);
     sAttributeType20 = Subst(vAttribute_20, 1, 1);
     sAttributeName20 = Subst(vAttribute_20, Scan(':', vAttribute_20) + 1, Long(vAttribute_20));
     
+    sPreviousAttributeName = cAlias;
     nMax = 20;
     nCtr = 1;
     While(nCtr <= nMax);
@@ -697,6 +699,7 @@ If(nDataRecord = 1);
         sAttributeName = Expand('%' | 'sAttributeName' | NumberToString(nCtr) | '%');
         If((Trim(sAttributeName) @<> '') & (DimIx(cElementAttributes, sAttributeName) = 0));
             AttrInsert(pDimension, '', sAttributeName, sAttributeType);
+            sPreviousAttributeName = sAttributeName;
         EndIf;
         nCtr = nCtr + 1;
     End;
