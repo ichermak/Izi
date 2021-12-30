@@ -4,7 +4,7 @@
 586,"C:\Template.csv"
 585,"C:\Template.csv"
 564,
-565,"bYaES3dT9zQ<LLxE0MfzwzEt6<7lW[66uR3>jM?P^OM2QYiQDSum>7u4W<tA=LrR[_lc\P]GiMm<;QdycgWQ`qhuAEWKfT4_6_zy]wPuu;Z6^D_\L[p8yx8\5_Bp8[E\7sKXOOxBIAuaq?FRR]3CYSfC07`dRU4WA?eUpBARkY5EZJ;50QGj77d=8g3jcF`HRV?3@W`K"
+565,"w63u]IJzFW?=C:6gW5sBiS9aIA>@nXD7?O^t[N0w]=>lK\901XYxmL;>J\lxOXd>U>ZC4Oo`_e_DWJhpWT<:0?wf^>g4xS^H:@`WIpV\Xqbd]D<Mv5ZFS2h0dkd[7H1n;Kf[IfKV]nP_QNf4>15dK;`oQQ3kNpqAJ<RItS^\0QA9uYQnEIrFy2[`1eONm4v]>4Qo68VC"
 559,1
 928,0
 593,
@@ -700,7 +700,7 @@ If(nDataRecord = 1);
         sAttributeType = Expand('%' | 'sAttributeType' | NumberToString(nCtr) | '%');
         sAttributeName = Expand('%' | 'sAttributeName' | NumberToString(nCtr) | '%');
         If((Trim(sAttributeName) @<> '') & (DimIx(cElementAttributes, sAttributeName) = 0));
-            AttrInsert(pDimension, '', sAttributeName, sAttributeType);
+            AttrInsert(pDimension, sPreviousAttributeName, sAttributeName, sAttributeType);
             sPreviousAttributeName = sAttributeName;
         EndIf;
         nCtr = nCtr + 1;
